@@ -1,0 +1,11 @@
+Package: pracma
+License: GPL (>= 3)
+
+Package: Bolstad2
+License: GPL (>= 2)
+
+Package: Brobdingnag
+License: GPL
+
+changes done to enable very large numbers
+License: GPL in accordance to packages above
