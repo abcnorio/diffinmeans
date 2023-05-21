@@ -1,8 +1,9 @@
-﻿# R code to enable integration functions to work with very large numbers
+﻿# R code implementation of GL Bretthorst (1993) "On the difference in means"
 
 ## Overview
 
-The [Brobdingnag](https://github.com/RobinHankin/Brobdingnag) R package provides functions to enable the work with very large numbers. Most integration functions fail if large numbers temporarily occur. The R code here implements functions of the R package Brobdingnag to enable integration functions from R packages [pracma](https://github.com/cran/pracma) and [Bolstad2](https://github.com/cran/Bolstad2) to work with very large numbers. This is helpful if one uses functions like Gamma or others within integrals that easily reach values beyond normal tolerance ie. near zero or up to infinity. R's tolerance is
+Bretthorst paper from 1993 is an analytical solution to the Behrens-Fisher problem of same/ different means/standard deviations from a Bayesian perspective. It works without MCMC like R packages BESTmcmc or brms. Two implementations - very similar - are available.
+
 
 ```
 > 10^(307:309)
@@ -13,63 +14,103 @@ The [Brobdingnag](https://github.com/RobinHankin/Brobdingnag) R package provides
 
 ## License
 
-see license file included - in short it is GPL >=2 - in accordance to the packages used.
+- Copyright of the original Mathematica code of UM Studer is with him.
+- Copyright of the original Mathematica code of P Gregory is with him.
+- R code adopted from Mathematica code: GPL >= v3
 
 ## Files
 
-- **brobdingnag.integral.r** = tweaked functions to work with very large numbers
-- **brobdingnag.integral_calls.r** = example code that shows that the tweaked functions produce the same results as the original functions
+- DiM_Bretthorst_UMS.r = R code completely rewritten as an adaptation of a Mathematica script written by UM Studer (1998).
+- DiM_Bretthorst_PG.r = R code completely rewritten as an adapatation of a Mathematica script originally created by P Gregory (2005).
 
 ## Functions used
 
-Original names just got a *.brob added at the end of the filename.
-
-- list2vec.brob = convert a Brobdingnag list to a Brobdingnag vector
-- scalarprod.brob = replace '%*%' scalarproduct that does not work for Brobdingnag objects
-
-from [Bolstad2](https://github.com/cran/Bolstad2):
-
-- sintegral.brob.parallel
-
-from [pracma](https://github.com/cran/pracma):
-
-- romberg.brob
-- cotes.brob
-- integral.brob ("Kronrod", "Simpson" but not "Clenshaw")
-- quadgk.brob
-- simpadpt.brob
-- quadinf.brob
-- quad.brob
-- trapz.brob
-- quadgr.brob
-
-Not all integration functions of pracma are covered. What is missing are:
-
-- 'Clenshaw' from integral
-- integral2
-- integral3
+- 
 
 ## Function calls
 
 Functions are called identical to the original version. Use as normal but add .brob to the name of the function call and use a function that gives out a Brobdingnag object that acts as input for the integration function.
 
 ```
-source("brobdingnag.integral.r")
+source(".r")
 [...]
 ```
 
 e.g.
 
 ```
-fx <- function(x) sin(x)
-f <- function(x) as.brob(sin(x))
-a <- 0
-b <- pi
-maxit <- 25
-tol <- 1e-15
-romberg.brob(f, a, b, maxit=maxit, tol=tol)
-as.brob(romberg(f=fx, a, b, maxit=maxit, tol=tol)$value)
+
 ```
+
+## Output
+
+The textual output is written as a hommage to the Bretthorst paper and mirrors the way results are reported there. Originally this was invented by UM Studer in his Mathematica script.
+
+## Variants
+
+### Qualitative version
+
+The qualitative version is only available for the UMS implementation. It allows to compare "4 of 5 vs. 8 of 10" regarding same/different means/ standard deviations. The function XXX calculates means and standard deviations from such qualitative success/failure input values. Then the usual formula are used to calculate posterior probabilities.
+
+Example
+
+```
+
+```
+
+### Quantitative version
+
+The quantitative version is available for the UMS as well as the PG version. One has to add lower and upper bounds for means and standard deviations as priors besides the actual empirical means and standard deviations that should be compared.
+
+Example:
+
+```
+
+```
+
+## Usage of R package Brobdingnag
+
+The calculation of the posterior probabilities depend on Gamma function calls used for integration. With larger sample sizes (not the ones used in the original paper) this leads to numbers beyond normal computer capability. If that happens, the scripts contain a switch to use the R package Brobdingnag for very large numbers. This works but leads to a substantial loss in speed although a multi-threaded version of Simpson rule is used (but written in pure R).
+
+Example:
+
+```
+
+```
+
+### Graphical output
+
+There is a graphical output for the qualitative version as well as the quantitative one. The qualitative graphical output is based on UMS whereas the quantitative one is based on PG.
+
+Example qutalitative version:
+
+```
+
+```
+
+Example quantitative version:
+
+```
+
+```
+
+It can be that the graphical output for the quantitative version is not possible due to difficult ranges. In such a case the function XXX allows to redefine the range which will allow to create a graphical output. This happens mostly if large numbers require the usage of the R package Brobdingnag and for the ratio of the standard deviations. The following example shows how to handle it.
+
+
+```
+
+```
+
+## TODO
+
+Rewrite the integration routines to work with R package Rmpfr to allow for arbitrary large numbers and to gain more speed.
+
+## References
+
+Bretthorst, G.L. (1993). On the difference in means.
+Gregory, P. (2005). Bayesian logical data analysis for the physical sciences. A comparative approach with Mathematica support. Cambridge University Press. https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB
+https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB
+Studer, U.M. (1998). Verlangen, Süchtigkeit und Tiefensystemik. Fallstudie des Suchttherapiezentrums für Drogensüchtige start again in Männedorf und Zürich von 1992 bis 1998. Bericht an das Bundesamt für Justiz. Zürich. URL: https://www.bj.admin.ch/dam/data/bj/sicherheit/smv/modellversuche/evaluationsberichte/37.pdf
 
 ## R version
 
@@ -77,6 +118,6 @@ All R scripts should work under R >=v3.
 
 ## Disclaimer
 
-R code was tested but is provided "as is". The example calls can be used to test for accuracy.
+R code was tested but is provided "as is".
 
 
