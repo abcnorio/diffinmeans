@@ -1,53 +1,9 @@
-### (C) 2005-2023 by Leo Guertler 
-### R-code supplement
-### to the book
-###
-### "Subjektive Ansichten und objektive Betrachtungen"
-###
-### written by Gürtler & Huber (2023)
-###
-### All R-code is published under the GPL v3 license:
-###
-### https://www.gnu.org/licenses/gpl-3.0.en.html
-###
-### except for 'borrowed' code - see links and references.
-### For this R-code the original license of the respective
-### authors is valid.
-###
-### R-code published on
-###
-### https://osdn.net/projects/mixedmethod-rcode
-### https://github.com/abcnorio/mixedmethod-rcode
-
-
 
 source("DiM_Bretthorst_PG.r")
 
 ################################################################################
 # ON THE DIFFERENCE OF MEANS
 ################################################################################
-
-# original Mathematica code by Phil Gregory
-
-# Ch. 9: Bayesian analysis of two independent samples
-# Introduction
-# This is a Mathematica implementation of the probability calculations discussed in the book in the section entitled,     
-# "Bayesian Comparison of Two Samples?". 
-#
-# based on a paper from G.L. Bretthorst (1993) "on the difference of means"
-
-#
-# see also Mathematica code by UM Studer (1996 + 1998) on the same problem (paper)
-# taken code from there to allow calculations based only on summary statistics
-# and not on raw data (see also Bretthorst, 1993, for an example taken from Jaynes)
-
-# R code by Leo G 2017-
-# first = 2017-04-19
-# last = 2020-10-22
-
-# notes:
-# *- introduce logs to integral calculations, but probably that won't help...
-# *- very small numbers are slightly different from Mathematica -> e.g. e-230
 
 # call PG scheme
 inputvalues <- list(snames = c("riverB.1","riverB.2"),

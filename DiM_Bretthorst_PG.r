@@ -1,38 +1,16 @@
-### (C) 2005-2023 by Leo Guertler 
-### R-code supplement
-### to the book
-###
-### "Subjektive Ansichten und objektive Betrachtungen"
-###
-### written by Gürtler & Huber (2023)
-###
-### All R-code is published under the GPL v3 license:
-###
-### https://www.gnu.org/licenses/gpl-3.0.en.html
-###
-### except for 'borrowed' code - see links and references.
-### For this R-code the original license of the respective
-### authors is valid.
-###
-### R-code published on
-###
-### https://osdn.net/projects/mixedmethod-rcode
-### https://github.com/abcnorio/mixedmethod-rcode
-
-
-
 ################################################################################
 # ON THE DIFFERENCE OF MEANS
 ################################################################################
 
 # original Mathematica code by Phil Gregory
+# this was used as a role model to write the R code
 
 # Ch. 9: Bayesian analysis of two independent samples
 # Introduction
 # This is a Mathematica implementation of the probability calculations discussed in the book in the section entitled,     
 # "Bayesian Comparison of Two Samples?". 
 #
-# based on a paper from G.L. Bretthorst (1993) "on the difference of means"
+# based on G.L. Bretthorst (1993) "On the difference of means"
 
 #
 # see also Mathematica code by UM Studer (1996 + 1998) on the same problem (paper)
@@ -42,11 +20,16 @@
 # R code by Leo G 2017
 # first = 2017-04-19
 # last = 2017-27-04
+# last = 2024-05-21
 
 # notes:
 # *- introduce logs to integral calculations, but probably that won't help...
 # *- very small numbers are slightly different from Mathematica -> e.g. e-230
 
+# additional note:
+# *- we use the sdame variable names and labels like P Gregory to allow comparison
+#    with his Mathematica notebook. This is different from the UMS script where the
+#    labels from UMS are used.
 
 ################################################################################
 # pre-calculations taken from UMS 1998
@@ -223,7 +206,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
 ################################################################################
 # pCSk
 # Compute pCSk = p(C,S|D_1,D_2,I) * p(D_1,D_2|I)
-# according to the formulas given in text (see Appendix C  entitled: "Difference in Two Samples").
+# according to GL Bretthorst (1993) formulas and appendix C of Gregory (2005)
 
   z <- n * (dsqubar - dbar^2)
   uL <- sqrt(n/2) * (low - dbar)
@@ -968,7 +951,7 @@ DiM.plot.calc.pg <- function(DiM.res, BROB=FALSE, fac.brob=1, cMasses=c(0.89,0.9
 ################################################################################
 # p(delta|D_1,D_2,I) problem
 # plot the difference in means independent of the sds are the same or not
-# THis is a weighted average of p(delta|S,D_1,D_2,I) and p(delta|Sbar,D_1,D_2,I)
+# This is a weighted average of p(delta|S,D_1,D_2,I) and p(delta|Sbar,D_1,D_2,I)
 # with weights are pS and pSbar ie. probs of sds are same/ different.
 # It also calcs the CIs.
 
@@ -1126,6 +1109,7 @@ DiM.plot.calc.pg <- function(DiM.res, BROB=FALSE, fac.brob=1, cMasses=c(0.89,0.9
   #MA: 1.0686e-210
   #R: 1.087353e-210
   #all other values are 100% identical...
+  #assumed is that this is due to the very large numbers used and therefor caused by "accuracy"
   
   #compile
   prA <- lapply(pr.CD1D2I, function(x) x/ (r.delta * pr.CD1D2I.sum))
@@ -1224,7 +1208,8 @@ DiM.plot.calc.pg <- function(DiM.res, BROB=FALSE, fac.brob=1, cMasses=c(0.89,0.9
   #MA: 4.31101e-211
   #R: 4.386639e-211
   #all other values are 100% identical...
-
+  #assumed is that this is due to the very large numbers used and therefor caused by "accuracy"
+  
   #compile
   prB <- lapply(pr.CbarD1D2I, function(x) x/ (r.delta * pr.CbarD1D2I.sum))
   #prB
@@ -1247,7 +1232,7 @@ DiM.plot.calc.pg <- function(DiM.res, BROB=FALSE, fac.brob=1, cMasses=c(0.89,0.9
 # p(r|D_1,D_2,I)
 # This section computes and plots the prob of the ratio of the sds independent
 # of same means or not.
-# THis is a weighted average p(r|C,D1,D2,I) and p(r|Cbar,D1,D2,I)
+# This is a weighted average p(r|C,D1,D2,I) and p(r|Cbar,D1,D2,I)
 # with weights pC and pCbar,
 
   #note by LG:

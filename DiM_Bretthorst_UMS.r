@@ -1,25 +1,3 @@
-### (C) 2005-2023 by Leo Guertler 
-### R-code supplement
-### to the book
-###
-### "Subjektive Ansichten und objektive Betrachtungen"
-###
-### written by Gürtler & Huber (2023)
-###
-### All R-code is published under the GPL v3 license:
-###
-### https://www.gnu.org/licenses/gpl-3.0.en.html
-###
-### except for 'borrowed' code - see links and references.
-### For this R-code the original license of the respective
-### authors is valid.
-###
-### R-code published on
-###
-### https://osdn.net/projects/mixedmethod-rcode
-### https://github.com/abcnorio/mixedmethod-rcode
-
-
 
 ################################################################################
 # On the difference in means
@@ -30,6 +8,11 @@
 # R code by Leo G
 # first: 12-06-05
 # latest: 21-06-06, 20-04-17, 07-09-20
+
+# additional note:
+# *- we use the sdame variable names and labels like UM Studer to allow comparison
+#    with his Mathematica code. This is different from the PG script where the
+#    labels from P Gregory are used.
 
 ################################################################################
 # success rates and integration bounds based on successes and total N

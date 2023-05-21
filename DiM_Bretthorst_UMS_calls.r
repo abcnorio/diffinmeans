@@ -1,35 +1,10 @@
-### (C) 2005-2023 by Leo Guertler 
-### R-code supplement
-### to the book
-###
-### "Subjektive Ansichten und objektive Betrachtungen"
-###
-### written by Gürtler & Huber (2023)
-###
-### All R-code is published under the GPL v3 license:
-###
-### https://www.gnu.org/licenses/gpl-3.0.en.html
-###
-### except for 'borrowed' code - see links and references.
-### For this R-code the original license of the respective
-### authors is valid.
-###
-### R-code published on
-###
-### https://osdn.net/projects/mixedmethod-rcode
-### https://github.com/abcnorio/mixedmethod-rcode
 
-
-
-rm(list=ls())
 source("DiM_Bretthorst_UMS.r")
 
 ################################################################################
 # On the difference in means
 # paper: G.L. Bretthorst "On the difference of means" (1993)
-
-#
-# R code based on Mathematica code by Urban Studer (90's, Zürich/ CH)
+################################################################################
 
 
 ################################################################################
@@ -176,7 +151,7 @@ inval <- list(
   Nii = 9,		#N group2
   smin = 0,		#UMS specific -> bounds on the mean -> only for SucRatesIntBounds()
   Di = 50,		#mean group1
-  si = 6.48,		#sd group1
+  si = 6.48,	#sd group1
   Dii = 42,		#mean group2
   sii = 7.48,	#sd group2
   L = 34,		#mean lower bound

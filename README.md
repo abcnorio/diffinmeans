@@ -2,21 +2,18 @@
 
 ## Overview
 
-Bretthorst paper from 1993 is an analytical solution to the Behrens-Fisher problem of same/ different means/standard deviations from a Bayesian perspective. It works without MCMC like R packages BESTmcmc or brms. Two implementations - very similar - are available.
+Bretthorst (1993)  "On the difference in means" is an analytical solution to the Behrens-Fisher problem of same/ different means/standard deviations from a Bayesian perspective. It works without MCMC like R packages BESTmcmc or brms. Two implementations - very similar - are available.
 
 
 ```
-> 10^(307:309)
-[1] 1e+307 1e+308    Inf
-> 10^(-323:-324)
-[1] 9.881313e-324  0.000000e+00
+...
 ```
 
 ## License
 
 - Copyright of the original Mathematica code of UM Studer is with him.
-- Copyright of the original Mathematica code of P Gregory is with him.
-- R code adopted from Mathematica code: GPL >= v3
+- Copyright of the original Mathematica code of P Gregory is with him. You can get the Mathematica notebook on the book's website.
+- R code: GPL >= v3
 
 ## Files
 
@@ -50,7 +47,7 @@ The textual output is written as a hommage to the Bretthorst paper and mirrors t
 
 ### Qualitative version
 
-The qualitative version is only available for the UMS implementation. It allows to compare "4 of 5 vs. 8 of 10" regarding same/different means/ standard deviations. The function XXX calculates means and standard deviations from such qualitative success/failure input values. Then the usual formula are used to calculate posterior probabilities.
+The qualitative version is only available for the UMS implementation. It allows to compare "4 of 5 vs. 8 of 10" regarding same/different means/ standard deviations. The function SucRatesIntBounds calculates means and standard deviations from such qualitative success/failure input values. Then the usual formula are used to calculate posterior probabilities.
 
 Example
 
@@ -107,10 +104,9 @@ Rewrite the integration routines to work with R package Rmpfr to allow for arbit
 
 ## References
 
-Bretthorst, G.L. (1993). On the difference in means.
-Gregory, P. (2005). Bayesian logical data analysis for the physical sciences. A comparative approach with Mathematica support. Cambridge University Press. https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB
-https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB
-Studer, U.M. (1998). Verlangen, Süchtigkeit und Tiefensystemik. Fallstudie des Suchttherapiezentrums für Drogensüchtige start again in Männedorf und Zürich von 1992 bis 1998. Bericht an das Bundesamt für Justiz. Zürich. URL: https://www.bj.admin.ch/dam/data/bj/sicherheit/smv/modellversuche/evaluationsberichte/37.pdf
+Bretthorst, G.L. (1993). [On the difference in means](https://bayes.wustl.edu/glb/diff.pdf). In Physics & Probability Essays in honor of Edwin T. Jaynes, W. T. Grandy and P. W. Milonni Eds., Cambridge University Press, England.
+Gregory, P. (2005). [Bayesian logical data analysis for the physical sciences]( https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB). A comparative approach with [Mathematica support](https://www.cambridge.org/nl/academic/subjects/statistics-probability/statistics-physical-sciences-and-engineering/bayesian-logical-data-analysis-physical-sciences-comparative-approach-mathematica-support?format=PB). Cambridge University Press.
+Studer, U.M. (1998). [Verlangen, Süchtigkeit und Tiefensystemik. Fallstudie des Suchttherapiezentrums für Drogensüchtige start again in Männedorf und Zürich von 1992 bis 1998](https://www.bj.admin.ch/dam/data/bj/sicherheit/smv/modellversuche/evaluationsberichte/37.pdf). Bericht an das Bundesamt für Justiz. Zürich.
 
 ## R version
 
