@@ -1,2 +1,9 @@
 R code
 License: GPL (>= 3)
+
+notes:
+
+The R code used the following Mathematica scripts as role models:
+
+- Copyright of the original Mathematica code of UM Studer is with him.
+- Copyright of the original Mathematica code of P Gregory is with him. You can get the Mathematica notebook on the book's website.

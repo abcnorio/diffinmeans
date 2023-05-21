@@ -9,7 +9,9 @@ Bretthorst (1993)  "On the difference in means" is an analytical solution to the
 ...
 ```
 
-## License
+## Licenses
+
+The R code used two Mathematica scripts as role models - very similar, but not identical implementations.
 
 - Copyright of the original Mathematica code of UM Studer is with him.
 - Copyright of the original Mathematica code of P Gregory is with him. You can get the Mathematica notebook on the book's website.
