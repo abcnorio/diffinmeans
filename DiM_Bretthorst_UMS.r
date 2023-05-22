@@ -64,6 +64,7 @@ SucRatesIntBounds <- function(Si, Ni, Sii, Nii, smin, snames=c("sample1","sample
 
 
 ################################################################################  
+#originally taken from Bolstad2 and tweaked to work with Brobdingnag
 #DEV BROB
 simpsonrule.brob <- function(fx, sL, sH, Nsteps=100)
 {
@@ -87,7 +88,7 @@ return(sum)
 ################################################################################
 #DEV
 #Gamma funcs
-# (generalized) incomplete gamma function
+#(generalized) incomplete gamma function
 gamma_inc_gen <- function(a,z0,z1=NA, log=FALSE)
 {
   # incomplete

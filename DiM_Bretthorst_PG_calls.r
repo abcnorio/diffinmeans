@@ -1,5 +1,6 @@
 
 source("DiM_Bretthorst_PG.r")
+source("DiM_Bretthorst_UMS.r")
 
 ################################################################################
 # ON THE DIFFERENCE OF MEANS

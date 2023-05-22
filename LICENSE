@@ -1,9 +1,15 @@
-R code
+R code script
 License: GPL (>= 3)
 
-notes:
+except for:
+
+Function: simpsonrule.brob from R package Bolstad2
+License: GPL (>= 2)
+note: sintegral from Bolstad2 was tweaked so it works with Brobdingnag numbers
+
+Additional notes:
 
 The R code used the following Mathematica scripts as role models:
 
-- Copyright of the original Mathematica code of UM Studer is with him.
+- Copyright of the original Mathematica code of UM Studer is with him. This Mathematica code is unpublished.
 - Copyright of the original Mathematica code of P Gregory is with him. You can get the Mathematica notebook on the book's website.
