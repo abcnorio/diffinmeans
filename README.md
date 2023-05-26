@@ -256,7 +256,7 @@ DiM.plot.pg(DiM.newlimits.calc.plot, filling=FALSE, by1=TRUE, BROB=TRUE)
 
 ## TODO
 
-Rewrite the integration function used to work multi-threaded and speed up the calculations. Us `logSum` and some other commands to speed up the calculation of the integrals. Another alternative is to use the package Rmpfr is.
+Rewrite the integration function used to work multi-threaded and speed up the calculations. Us `logSum` and some other commands to speed up the calculation of the integrals. Another alternative is to use the package Rmpfr.
 
 ## References
 
