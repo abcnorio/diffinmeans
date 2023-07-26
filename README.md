@@ -18,12 +18,12 @@ The paper written by Bretthorst (1993) "On the difference in means" is a full an
 
 | Function | Description |
 | --- | --- |
-| `DiM_Bretthorst_UMS.r` | **** |
+| `DiM_Bretthorst_UMS.r` | **Calculate posteriors, print results, plot input values (qual, quan)** |
 | `SucRatesIntBounds` | Calculate x_bar and sd from successes/ failures |
-| `PMV.hypo` |  |
-| `PMbarV.hypo` |  |
-| `PMVbar.hypo` |  |
-| `PMbarVbar.hypo` |  |
+| `PMV.hypo` | Bayesian hypothesis |
+| `PMbarV.hypo` | Bayesian hypothesis |
+| `PMVbar.hypo` | Bayesian hypothesis |
+| `PMbarVbar.hypo` | Bayesian hypothesis |
 | `.DiM_ccs` | create constants from initial values |
 | `.DiM_callintegrals` | calculate integrals (MV, MbarV, MVbar, MbarVbar) |
 | `.DiM_prepres` | prepare the resulting probabilities based on the integrals |
@@ -34,7 +34,7 @@ The paper written by Bretthorst (1993) "On the difference in means" is a full an
 | `.DiM_speedtest` | small speed test to compare the methods by calculating the four integrals |
 | `.DiM.quan.plot` | plot inpuit data (quantitative version, raw or simulated from ND) |
 | | |
-| `DiM_Bretthorst_PG.r` | **** |
+| `DiM_Bretthorst_PG.r` | **Calculate and plot posteriors (quan)** |
 | `ums2pg` | convert initial values from UMS style to PG style |
 | `DiM.pg` | calculate posterior probs according to PG Mathematica code |
 | `DiM.extract.limits` | extract and apply (new) limits for the posterior plots |
@@ -42,7 +42,7 @@ The paper written by Bretthorst (1993) "On the difference in means" is a full an
 | `DiM.plot.pg` | plot posteriors from `DiM.pg` |
 | `DiM.print.pg` | print results from `DiM.pg` |
  | |
-| `DiM_Bretthorst_helperfuncs-general.r` | **** |
+| `DiM_Bretthorst_helperfuncs-general.r` | **Functions for log version, brob objects, and numerical integration** |
 | `.llog.2add.short` | log(x+y) |
 | `.llog.2sub.short` | log(x-y) |
 | `gamma_inc_gen` | (generalized) incomplete gamma function for brob object |
