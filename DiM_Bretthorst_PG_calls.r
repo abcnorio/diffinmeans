@@ -1,10 +1,10 @@
-
-source("DiM_Bretthorst_PG.r")
-source("DiM_Bretthorst_UMS.r")
-
 ################################################################################
 # ON THE DIFFERENCE OF MEANS
 ################################################################################
+
+source("DiM_Bretthorst_PG.r")
+source("DiM_Bretthorst_UMS.r")
+source("DiM_Bretthorst_helperfuncs-general.r")
 
 # call PG scheme
 inputvalues <- list(snames = c("riverB.1","riverB.2"),
@@ -31,63 +31,64 @@ inputvalues <- list(snames = c("riverB.1","riverB.2"),
                     # lower sd
                     sigma.low = 1)
 inputvalues
+# normal
 dim.res <- DiM.pg(invtyp="pg", inputvalues, print.res=TRUE)
+DiM.print.pg(dim.res)
 dim.res.newlimits <- DiM.extract.limits(dim.res, scaleL=30, scaleH=4, change=TRUE)
 DiM.extract.limits(dim.res.newlimits, change=FALSE)
-dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, BROB=FALSE)
-DiM.plot.pg(dim.res.calc, filling=FALSE, BROB=FALSE)
+dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, type="normal")
+DiM.plot.pg(dim.res.calc, filling=FALSE, type="normal")
 
-
+# brob
+dim.res <- DiM.pg(invtyp="pg", inputvalues, print.res=TRUE, type="brob")
+DiM.print.pg(dim.res)
 
 # call according to UMS scheme
-inputvalues <- list(snames=c("Jaynes.1","Jaynes.2"), si=6.48, Ni=4, sii=7.48, Nii=9, Di=50, Dii=42, L=34, H=58, sL=3, sH=10, ndelta=1000, nr=1000)
-inputvalues <- ums2pg(inputvalues)
-inputvalues
-###FIX IT
-dim.res <- DiM.pg(invtyp="ums", inputvalues=inputvalues, print.res=TRUE)
+inputvalues.ums <- list(snames=c("Jaynes.1","Jaynes.2"), si=6.48, Ni=4, sii=7.48, Nii=9, Di=50, Dii=42, L=34, H=58, sL=3, sH=10, ndelta=1000, nr=1000)
+dim.res <- DiM.pg(invtyp="ums", inputvalues=inputvalues.ums, print.res=TRUE)
 
-
-
-#works
+# works
 res.SIB <- SucRatesIntBounds(Si=11, Ni=15, Sii=10, Nii=16, smin=0, snames=c("voluntary","non-voluntary"))
 res.SIB
 #
-DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, BROB=FALSE)
+DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, type="normal")
 DIM.pg.res
 DiM.res <- DIM.pg.res
 DiM.print.pg(DIM.pg.res)
 # ratio of SD requires input values scaleL (low) and scaleH (high), otherwise the script breaks
-DiM.plotvalues.res.nonbrob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, BROB=FALSE)
-DiM.plot.pg(DiM.plotvalues.res.nonbrob, filling=TRUE, BROB=FALSE)
+DiM.plotvalues.res.nonbrob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, type="normal")
+DiM.plot.pg(DiM.plotvalues.res.nonbrob, filling=TRUE, type="normal")
 
-#as brob
-DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, BROB=TRUE)
+
+# as brob
+DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, type="brob")
 DIM.pg.res
 DiM.print.pg(DIM.pg.res)
-DiM.plotvalues.res.nonbrob.brob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, BROB=TRUE)
-DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, BROB=TRUE)
+DiM.plotvalues.res.nonbrob.brob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, type="normal")
+DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, type="normal")
 
 
-#normally does not work
+# normally does not work
 res.SIB.NRFtotal <- SucRatesIntBounds(Si=(20+13), Ni=(47+28), Sii=(338 %/% 4), Nii=338, smin=0, snames=c("male","female"))
 res.SIB.NRFtotal
 # results in INF values in integrals - script breaks without BROB
-DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, BROB=FALSE)
+DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="normal")
 # works with BROB
-DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, BROB=TRUE)
+DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="brob")
+# DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, BROB=TRUE)
 DiM.print.pg(DIM.pg.res.brob)
-#try several limits...
+# try several limits...
 DiM.extract.limits(DIM.pg.res.brob, scaleL=10, scaleH=1, change=FALSE)
 DiM.extract.limits(DIM.pg.res.brob, scaleL=10, scaleH=2, change=FALSE)
 DiM.extract.limits(DIM.pg.res.brob, scaleL=5, scaleH=2, change=FALSE)
 DiM.extract.limits(DIM.pg.res.brob, scaleL=100, scaleH=4, change=FALSE)
-#apply new limits
+# apply new limits
 DiM.newlimits <- DiM.extract.limits(DIM.pg.res.brob, scaleL=10, scaleH=1, change=TRUE)
 DiM.newlimits <- DiM.extract.limits(DIM.pg.res.brob, scaleL=100, scaleH=4, change=TRUE)
-#check
+# check
 DiM.extract.limits(DiM.newlimits, change=FALSE)
-#calc plot values
-DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, BROB=TRUE)
-#plot
-DiM.plot.pg(DiM.newlimits.calc.plot, filling=FALSE, by1=TRUE, BROB=TRUE)
+# calc plot values
+DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, type="brob")
+# plot
+DiM.plot.pg(DiM.newlimits.calc.plot, filling=FALSE, by1=TRUE, type="brob")
 

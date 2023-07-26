@@ -50,3 +50,9 @@ rsconnect/
 
 # all files that end with
 *~
+
+# different versions
+UPDATE_log/
+
+# old code
+old/
