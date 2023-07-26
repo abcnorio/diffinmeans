@@ -78,36 +78,36 @@ DiM.comp <- .DiM_speedtest(DiM.ccs=DiM.ccs)
 DiM.comp
 
 # calculate integrals
-DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, TYPE="normal")
+DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, type="normal")
 DiM.integrals.normal
 #DiM.integrals <- DiM.integrals.normal
 
-DiM.integrals.log <- .DiM_callintegrals(DiM.ccs, TYPE="log")
+DiM.integrals.log <- .DiM_callintegrals(DiM.ccs, type="log")
 exp(DiM.integrals.log)
 #DiM.integrals <- DiM.integrals.log
 
-DiM.integrals.brob <- .DiM_callintegrals(DiM.ccs, TYPE="brob")
+DiM.integrals.brob <- .DiM_callintegrals(DiM.ccs, type="brob")
 sapply(DiM.integrals.brob, as.numeric)
 #DiM.integrals <- DiM.integrals.brob
 
 
 # prepare results before printing them based on integrals
-DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, TYPE="normal", percfac=1)
-DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, TYPE="normal", convback=TRUE, percfac=1)
+DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, type="normal", percfac=1)
+DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, type="normal", convback=TRUE, percfac=1)
 DiM.out.convbackT.normal
 results <- DiM.out.convbackT.normal
 UMSprint(results, inval=inval, dig=3)
  
-DiM.out.convbackT.log <- .DiM_prepres(DiM.integrals.log, TYPE="log", convback=TRUE, percfac=1)
+DiM.out.convbackT.log <- .DiM_prepres(DiM.integrals.log, type="log", convback=TRUE, percfac=1)
 UMSprint(DiM.out.convbackT.log, inval=inval, dig=3)
 
-DiM.out.convbackF.log <- .DiM_prepres(DiM.integrals.log, TYPE="log", convback=FALSE, percfac=1)
+DiM.out.convbackF.log <- .DiM_prepres(DiM.integrals.log, type="log", convback=FALSE, percfac=1)
 UMSprint(DiM.out.convbackF.log, inval=inval, dig=3)
 
-DiM.out.convbackT.brob <- .DiM_prepres(DiM.integrals.brob, TYPE="brob", convback=TRUE, percfac=1)
+DiM.out.convbackT.brob <- .DiM_prepres(DiM.integrals.brob, type="brob", convback=TRUE, percfac=1)
 UMSprint(DiM.out.convbackT.brob, inval=inval, dig=3)
 
-DiM.out.convbackF.brob <- .DiM_prepres(DiM.integrals.brob, TYPE="brob", convback=FALSE, percfac=1)
+DiM.out.convbackF.brob <- .DiM_prepres(DiM.integrals.brob, type="brob", convback=FALSE, percfac=1)
 UMSprint(DiM.out.convbackF.brob, inval=inval, dig=3)
 
 # plot
