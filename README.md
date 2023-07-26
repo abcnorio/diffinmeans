@@ -104,7 +104,7 @@ This results in:
 
 <details>
 
-<summary>Results</summary>
+<summary>posterior probabilities</summary>
 
 ```
 #########################################################################################
@@ -353,7 +353,7 @@ This gives the output:
 
 <details>
 
-<summary>Results</summary>
+<summary>posterior probabilities</summary>
 
 ```
 ##########################################################################
