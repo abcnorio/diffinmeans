@@ -1,10 +1,10 @@
-### (C) 2005-2023 by Leo Guertler 
+### (C) 2005-2023 by LG
 ### R-code supplement
 ### to the book
 ###
 ### "Subjektive Ansichten und objektive Betrachtungen"
 ###
-### written by Gürtler & Huber (2023)
+### written by LG & Huber (2023)
 ###
 ### All R-code is published under the GPL v3 license:
 ###
@@ -30,6 +30,7 @@
 # first: 12-06-05, 21-06-06, 20-04-17
 # brob: 07-09-20
 # use log-only: 2023-06-29
+# latest: 2023-07-26
 
 # load helpe functions and all what is necessary
 source("DiM_Bretthorst_UMS.r")
@@ -78,37 +79,37 @@ DiM.comp <- .DiM_speedtest(DiM.ccs=DiM.ccs)
 DiM.comp
 
 # calculate integrals
-DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, type="normal")
+DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, method="normal")
 DiM.integrals.normal
 #DiM.integrals <- DiM.integrals.normal
 
-DiM.integrals.log <- .DiM_callintegrals(DiM.ccs, type="log")
+DiM.integrals.log <- .DiM_callintegrals(DiM.ccs, method="log")
 exp(DiM.integrals.log)
 #DiM.integrals <- DiM.integrals.log
 
-DiM.integrals.brob <- .DiM_callintegrals(DiM.ccs, type="brob")
+DiM.integrals.brob <- .DiM_callintegrals(DiM.ccs, method="brob")
 sapply(DiM.integrals.brob, as.numeric)
 #DiM.integrals <- DiM.integrals.brob
 
 
 # prepare results before printing them based on integrals
-DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, type="normal", percfac=1)
-DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, type="normal", convback=TRUE, percfac=1)
+DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, method="normal", percfac=1)
+DiM.out.convbackT.normal <- .DiM_prepres(DiM.integrals.normal, method="normal", convback=TRUE, percfac=1)
 DiM.out.convbackT.normal
 results <- DiM.out.convbackT.normal
-UMSprint(results, inval=inval, dig=3)
+UMSprint(results=results, ccs=DiM.ccs, inval=inval, dig=3)
  
-DiM.out.convbackT.log <- .DiM_prepres(DiM.integrals.log, type="log", convback=TRUE, percfac=1)
-UMSprint(DiM.out.convbackT.log, inval=inval, dig=3)
+DiM.out.convbackT.log <- .DiM_prepres(DiM.integrals.log, method="log", convback=TRUE, percfac=1)
+UMSprint(results=DiM.out.convbackT.log, ccs=DiM.ccs, inval=inval, dig=3)
 
-DiM.out.convbackF.log <- .DiM_prepres(DiM.integrals.log, type="log", convback=FALSE, percfac=1)
-UMSprint(DiM.out.convbackF.log, inval=inval, dig=3)
+DiM.out.convbackF.log <- .DiM_prepres(DiM.integrals.log, method="log", convback=FALSE, percfac=1)
+UMSprint(results=DiM.out.convbackF.log, ccs=DiM.ccs, inval=inval, dig=3)
 
-DiM.out.convbackT.brob <- .DiM_prepres(DiM.integrals.brob, type="brob", convback=TRUE, percfac=1)
-UMSprint(DiM.out.convbackT.brob, inval=inval, dig=3)
+DiM.out.convbackT.brob <- .DiM_prepres(DiM.integrals.brob, method="brob", convback=TRUE, percfac=1)
+UMSprint(results=DiM.out.convbackT.brob, ccs=DiM.ccs, inval=inval, dig=3)
 
-DiM.out.convbackF.brob <- .DiM_prepres(DiM.integrals.brob, type="brob", convback=FALSE, percfac=1)
-UMSprint(DiM.out.convbackF.brob, inval=inval, dig=3)
+DiM.out.convbackF.brob <- .DiM_prepres(DiM.integrals.brob, method="brob", convback=FALSE, percfac=1)
+UMSprint(results=DiM.out.convbackF.brob, ccs=DiM.ccs, inval=inval, dig=3)
 
 # plot
 UMSplot(inval=inval)

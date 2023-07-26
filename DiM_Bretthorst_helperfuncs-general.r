@@ -113,9 +113,9 @@ gamma_inc_gen.alt <- function(a,z0,z1=NA, log=FALSE, lower=FALSE)
 #upper <- pi
 #Nsteps <- 100
 ##
-#sprintf("%.16e", simpsonrule.nlb(fx=f, lower=lower, upper=upper, type="normal",Nsteps=Nsteps) )
-#sprintf("%.16e", exp(simpsonrule.nlb(fx=f.log, lower=lower, upper=upper, type="log",Nsteps=Nsteps)) )
-#sprintf("%.16e", as.numeric(simpsonrule.nlb(fx=f.brob, lower=lower, upper=upper, type="brob",Nsteps=Nsteps)) )
+#sprintf("%.16e", simpsonrule.nlb(fx=f, lower=lower, upper=upper, method="normal",Nsteps=Nsteps) )
+#sprintf("%.16e", exp(simpsonrule.nlb(fx=f.log, lower=lower, upper=upper, method="log",Nsteps=Nsteps)) )
+#sprintf("%.16e", as.numeric(simpsonrule.nlb(fx=f.brob, lower=lower, upper=upper, method="brob",Nsteps=Nsteps)) )
 #sprintf("%.16e", integrate(f,lower,upper)$v )
 ################################################################################ 
 
@@ -171,7 +171,7 @@ return(res)
 # Simpson rule for normal, log, and brob
 simpsonrule.nlb <-  function(fx,
                              lower, upper,
-                             type="normal", # log, brob
+                             method="normal", # log, brob
                              eps=.Machine$double.xmin,
                              #eps=.Machine$double.eps,
                              log1p.crit=1e-09, # 1e-15
@@ -189,7 +189,7 @@ simpsonrule.nlb <-  function(fx,
     cat("\nBe aware of the limits chosen:\tlower > upper\n.Negative value of the integral will result.\n")
     return( -1 * simpsonrule.nlb(fx,
                                  upper, lower,
-                                 type=type,
+                                 method=method,
                                  eps=eps,
                                  log1p.crit=log1p.crit,
                                  Nsteps=Nsteps,
@@ -203,11 +203,11 @@ simpsonrule.nlb <-  function(fx,
   # avoid infinite values (zero with log(0), etc.)
   if(fixINF == TRUE)
   {
-    if(type %in% c("normal","log"))
+    if(method %in% c("normal","log"))
     {
       if(is.infinite(fx(lower))) lower <- lower + eps * hml.s
       if(is.infinite(fx(upper))) upper <- upper - eps * hml.s      
-    } else if(type == "brob")
+    } else if(method == "brob")
     {
       if(is.infinite(fx(lower)@x)) lower <- lower + eps * hml.s
       if(is.infinite(fx(upper)@x)) upper <- upper - eps * hml.s
@@ -215,7 +215,7 @@ simpsonrule.nlb <-  function(fx,
   }
   sek <- seq(lower,upper,length=sek.l)
   
-  if(type == "normal")
+  if(method == "normal")
   {
     xfxap <- fx(sek)
     h <- xfxap[2] - xfxap[1]
@@ -223,7 +223,7 @@ simpsonrule.nlb <-  function(fx,
                      4*xfxap[2 * (1:Nsteps)] +
                      xfxap[2 * (1:Nsteps) + 1] )
                /3)
-  } else if(type == "log")
+  } else if(method == "log")
   {
     if(parallel)
     {
@@ -258,7 +258,7 @@ simpsonrule.nlb <-  function(fx,
            res <- h.log - log(3) +  max.s.log + log(sum.log)
     )
     
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     fx.brob <- list2vec.brob(lapply(seq_along(1:sek.l), function(i) fx(sek[i])))
     h <- as.brob(sek[2] - sek[1]) # diff

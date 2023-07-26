@@ -3,7 +3,7 @@ License: GPL (>= 3)
 
 except for:
 
-Package: Bolstad2 (simpsonrule.brob is a tweaked version of sintegral)
+Package: Bolstad2 (simpsonrule.nlb is a highly tweaked version of sintegral)
 License: GPL (>= 2)
 
 Additional notes:

@@ -36,11 +36,11 @@ dim.res <- DiM.pg(invtyp="pg", inputvalues, print.res=TRUE)
 DiM.print.pg(dim.res)
 dim.res.newlimits <- DiM.extract.limits(dim.res, scaleL=30, scaleH=4, change=TRUE)
 DiM.extract.limits(dim.res.newlimits, change=FALSE)
-dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, type="normal")
-DiM.plot.pg(dim.res.calc, filling=FALSE, type="normal")
+dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, method="normal")
+DiM.plot.pg(dim.res.calc, filling=FALSE, method="normal")
 
 # brob
-dim.res <- DiM.pg(invtyp="pg", inputvalues, print.res=TRUE, type="brob")
+dim.res <- DiM.pg(invtyp="pg", inputvalues, print.res=TRUE, method="brob")
 DiM.print.pg(dim.res)
 
 # call according to UMS scheme
@@ -51,30 +51,29 @@ dim.res <- DiM.pg(invtyp="ums", inputvalues=inputvalues.ums, print.res=TRUE)
 res.SIB <- SucRatesIntBounds(Si=11, Ni=15, Sii=10, Nii=16, smin=0, snames=c("voluntary","non-voluntary"))
 res.SIB
 #
-DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, type="normal")
+DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, method="normal")
 DIM.pg.res
 DiM.res <- DIM.pg.res
 DiM.print.pg(DIM.pg.res)
 # ratio of SD requires input values scaleL (low) and scaleH (high), otherwise the script breaks
-DiM.plotvalues.res.nonbrob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, type="normal")
-DiM.plot.pg(DiM.plotvalues.res.nonbrob, filling=TRUE, type="normal")
-
+DiM.plotvalues.res.nonbrob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, method="normal")
+DiM.plot.pg(DiM.plotvalues.res.nonbrob, filling=TRUE, method="normal")
 
 # as brob
-DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, type="brob")
+DIM.pg.res <- DiM.pg(invtyp="ums", inputvalues=res.SIB, print.res=TRUE, method="brob")
 DIM.pg.res
 DiM.print.pg(DIM.pg.res)
-DiM.plotvalues.res.nonbrob.brob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, type="normal")
-DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, type="normal")
+DiM.plotvalues.res.nonbrob.brob <- DiM.plot.calc.pg(DIM.pg.res, scaleL=2, scaleH=8, method="brob")
+DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, method="brob")
 
 
 # normally does not work
 res.SIB.NRFtotal <- SucRatesIntBounds(Si=(20+13), Ni=(47+28), Sii=(338 %/% 4), Nii=338, smin=0, snames=c("male","female"))
 res.SIB.NRFtotal
 # results in INF values in integrals - script breaks without BROB
-DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="normal")
+DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, method="normal")
 # works with BROB
-DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="brob")
+DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, method="brob")
 # DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, BROB=TRUE)
 DiM.print.pg(DIM.pg.res.brob)
 # try several limits...
@@ -88,7 +87,7 @@ DiM.newlimits <- DiM.extract.limits(DIM.pg.res.brob, scaleL=100, scaleH=4, chang
 # check
 DiM.extract.limits(DiM.newlimits, change=FALSE)
 # calc plot values
-DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, type="brob")
+DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, method="brob")
 # plot
-DiM.plot.pg(DiM.newlimits.calc.plot, filling=FALSE, by1=TRUE, type="brob")
+DiM.plot.pg(DiM.newlimits.calc.plot, filling=FALSE, by1=TRUE, method="brob")
 

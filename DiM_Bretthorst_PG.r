@@ -98,13 +98,13 @@ ums2pg <- function(inputvalues)
 
 
 ################################################################################
-DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=100, type="normal", ndelta=1000, nr=1000)
+DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=100, method="normal", ndelta=1000, nr=1000)
 {
   #Bretthorst DiM
   #adapted from Mathematica code by Phil Gregory
 
   #for large numbers
-  if(type=="brob")
+  if(method=="brob")
   {
     library(Brobdingnag)
     cat("\nUsing log() and package 'Brobdingnag'\nAll results are expressed as log(RESULT)\n")
@@ -186,7 +186,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
 
  } else
  {
-  stop(paste("\nNo valid input type for input values given.\n\n",sep=""))
+  stop(paste("\nNo valid input method for input values given.\n\n",sep=""))
  }
 
   
@@ -252,7 +252,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
     }
     # integrate
     #sL=lower, sH=upper
-    pCSk.brob <- simpsonrule.nlb(fx=fnc1.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+    pCSk.brob <- simpsonrule.nlb(fx=fnc1.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     return(pCSk.brob)
   }
   #call:
@@ -308,9 +308,9 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
       ( as.brob( pgamma(u2A(A)/sigma.high^2,n2/2, log.p=FALSE) ) - as.brob( pgamma(u2A(A)/sigma.low^2,n2/2, log.p=FALSE) ) )
     }
     # integrate
-    pCSbark.brob <- simpsonrule.nlb(fx=fnc2.brob, lower=low, upper=high, type="brob", Nsteps=Nsteps)
+    pCSbark.brob <- simpsonrule.nlb(fx=fnc2.brob, lower=low, upper=high, method="brob", Nsteps=Nsteps)
     
-    #simpsonrule.nlb(fx=fnc2.brob, lower=low, upper=high, type="brob", Nsteps=Nsteps)
+    #simpsonrule.nlb(fx=fnc2.brob, lower=low, upper=high, method="brob", Nsteps=Nsteps)
     #simpsonrule.brob(fx=fnc2.brob, sL=low, sH=high, Nsteps=Nsteps)
     #
     ## taken from sintegral from Bolstad2
@@ -368,7 +368,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
       (errf.brob(ERR=u2H/sigma1) - errf.brob(ERR=u2L/sigma1))
     }
     # integrate
-    pCbarSk.brob <- simpsonrule.nlb(fx=fnc3.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+    pCbarSk.brob <- simpsonrule.nlb(fx=fnc3.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     return(pCbarSk.brob)
   }
   #call:
@@ -407,7 +407,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
       (errf.brob(ERR=u1H/sigma1) - errf.brob(ERR=u1L/sigma1))
     }
     # integrate
-    pCbarSbark.A.brob <- simpsonrule.nlb(fx=fnc4.A.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+    pCbarSbark.A.brob <- simpsonrule.nlb(fx=fnc4.A.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     return(pCbarSbark.A.brob)
   }
   #call:
@@ -439,7 +439,7 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
       (errf.brob(ERR=u2H/sigma2) - errf.brob(ERR=u2L/sigma2))
     }
     # integrate
-    pCbarSbark.B.brob <- simpsonrule.nlb(fx=fnc4.B.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+    pCbarSbark.B.brob <- simpsonrule.nlb(fx=fnc4.B.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     return(pCbarSbark.B.brob)
   }
   #call:
@@ -469,9 +469,9 @@ DiM.pg <- function(invtyp=NULL, inputvalues=NULL, print.res=TRUE, dig=4, Nsteps=
                          check.names = FALSE)
   
   
-cat("\nMethod = ",type,"\n",sep="")
+cat("\nMethod = ",method,"\n",sep="")
 # compute single hypotheses
-if(type=="normal")
+if(method=="normal")
 {
   cat("\nCalculate pCSk")
   pCSk <- pCSk.hypo(n=n, Rc=Rc, Rsigma=Rsigma, z=z, uH=uH, uL=uL)
@@ -485,7 +485,7 @@ if(type=="normal")
   pCbarSbark.B <- pCbarSbark.B.hypo(n1=n1, z1=z1, u2H=u2H, u2L=u2L)
   # compile pCbarSbark.A and pCbarSbark.B
   pCbarSbark <- ( (2*pi)^(-n/2) * pi * pCbarSbark.A * pCbarSbark.B ) / ( 8 * Rc^2 * log(Rsigma)^2 * sqrt(n1*n2) )
-} else if(type=="brob")
+} else if(method=="brob")
 {
 # BROB
   cat("\nCalculate pCSk")
@@ -567,12 +567,12 @@ if(type=="normal")
                                "sign" = NA,
                                check.names = FALSE)
   
-  if(type=="normal")
+  if(method=="normal")
   {
     posterior.df[,"Probability"] <- unlist(posterior.probs)
     OR.res.df["Odds Ratio"] <- unlist(OR.post)
     tot.out <- as.numeric(tot)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     # posterior probs
     posterior.df[,"Probability"] <- signif(unlist(lapply(posterior.probs,as.numeric)), digits=dig)
@@ -619,7 +619,7 @@ if(type=="normal")
               posterior.df = posterior.df,
               OR.post = OR.post,
               OR.res.df = OR.res.df,
-              type = type
+              method = method
               )
   
 # print tables
@@ -631,7 +631,7 @@ if(type=="normal")
 return(res)
 }
 # call:
-# DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="brob")
+# DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, method="brob")
 ################################################################################
 
 
@@ -730,14 +730,14 @@ DiM.extract.limits <- function(DiM.res, scaleL=NULL, scaleH=NULL, low=NULL, high
 
 
 ################################################################################
-DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,0.96), low=NULL, high=NULL, sigma.low=NULL, sigma.high=NULL, scaleL=NULL, scaleH=NULL, Nsteps=100)
+DiM.plot.calc.pg <- function(DiM.res, method="normal", fac.brob=1, cMasses=c(0.89,0.96), low=NULL, high=NULL, sigma.low=NULL, sigma.high=NULL, scaleL=NULL, scaleH=NULL, Nsteps=100)
 {
   
   cat("\n\nCalculate graphical output for the various probabilities...\n")
   library(progress)
   
   # for large numbers
-  if(type=="brob")
+  if(method=="brob")
   {
     library(Brobdingnag)
     fac.brob <- 0.1
@@ -834,12 +834,12 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
     #print(i)
     pb$tick()
     delta <- delta.sek[i]
-    if(type=="normal")
+    if(method=="normal")
     {
       pdel.SD1D2I[[i]] <- integrate(fndbV, lower=beta.low, upper=beta.high)$value
-    } else if(type=="brob")
+    } else if(method=="brob")
     {
-      pdel.SD1D2I[[i]] <- simpsonrule.nlb(fx=fndbV.brob, lower=beta.low, upper=beta.high, type="brob", Nsteps=Nsteps)
+      pdel.SD1D2I[[i]] <- simpsonrule.nlb(fx=fndbV.brob, lower=beta.low, upper=beta.high, method="brob", Nsteps=Nsteps)
     }
     pdel.SD1D2I.sum <- pdel.SD1D2I.sum + pdel.SD1D2I[[i]]
   }
@@ -851,7 +851,7 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   pdelA <- lapply(pdel.SD1D2I, function(x) x/ (delta.delta * pdel.SD1D2I.sum))
   #pdelA <- pdel.SD1D2I / (delta.delta * sum(pdel.SD1D2I))
   # create dataframe with input and results
-  if(type=="normal")
+  if(method=="normal")
   {
     pdelta.df <- data.frame(delta.sek = delta.sek,
                             pdel.SD1D2I = unlist(pdel.SD1D2I),
@@ -859,7 +859,7 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
                             pdelA = unlist(pdelA),
                             pdelA.sign = NA
                             )
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pdelta.df <- data.frame(delta.sek = delta.sek,
                             pdel.SD1D2I = unlist(lapply(pdel.SD1D2I,function(x) x@x)),
@@ -933,12 +933,12 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
     #print(i)
     pb$tick()
     delta <- delta.sek[i]
-    if(type=="normal")
+    if(method=="normal")
     {
       pdel.SbarD1D2I[[i]] <- integrate(fndbVbar, lower=beta.low, upper=beta.high)$value
-    } else if(type=="brob")
+    } else if(method=="brob")
     {
-      pdel.SbarD1D2I[[i]] <- simpsonrule.nlb(fx=fndbVbar.brob, lower=beta.low, upper=beta.high, type="brob", Nsteps=Nsteps)
+      pdel.SbarD1D2I[[i]] <- simpsonrule.nlb(fx=fndbVbar.brob, lower=beta.low, upper=beta.high, method="brob", Nsteps=Nsteps)
     }
     pdel.SbarD1D2I.sum <- pdel.SbarD1D2I.sum + pdel.SbarD1D2I[[i]]
   }
@@ -949,10 +949,10 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   #pdelB <- pdel.SbarD1D2I / (delta.delta * sum(pdel.SbarD1D2I))
   pdelB <- lapply(pdel.SbarD1D2I, function(x) x/ (delta.delta * pdel.SbarD1D2I.sum))
   # add to dataframe
-  if(type=="normal")
+  if(method=="normal")
   {
     pdelta.df[,c("pdel.SbarD1D2I","pdel.SbarD1D2I.sign","pdelB","pdelB.sign")] <- data.frame(unlist(pdel.SbarD1D2I), NA, unlist(pdelB),NA)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pdelta.df[,c("pdel.SbarD1D2I","pdel.SbarD1D2I.sign","pdelB","pdelB.sign")] <- data.frame(
                             unlist(lapply(pdel.SbarD1D2I,function(x) x@x)),
@@ -985,11 +985,11 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
 
   #pdelave = average of pdelA and pdelB
   cat("Calculate average of pdelA and pdelB...\n")
-  if(type=="normal")
+  if(method=="normal")
   {
     pdelave <- (pS * pdelta.df[,"pdelA"] + pSbar * pdelta.df[,"pdelB"])
     pdelta.df[,c("pdelave","pdelave.sign","pdelave.delta.delta","pdelave.delta.delta.sign")] <- data.frame(as.numeric(pdelave / sum(pdelave)),NA,as.numeric(pdelave / sum(pdelave))/delta.delta,NA)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pS.pdelA <- lapply(pdelA, function(x) x*pS)
     pSbar.pdelB <- lapply(pdelB, function(x) x*pSbar)
@@ -1007,9 +1007,9 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   
 ######## FUNCTION
   # function to calculate and extract HDI infos from densities
-  extractcMass.values <- function(dframe, cMass=0.95, type="normal")
+  extractcMass.values <- function(dframe, cMass=0.95, method="normal")
   {
-    if(type=="brob") return(NA)
+    if(method=="brob") return(NA)
     library(HDInterval)
     orig.names <- colnames(dframe)
     dframe.d <- dim(dframe)
@@ -1032,8 +1032,8 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   #create 89% and 96% HDI infos    
   cat("Calculate HDIs for the average of pdelA and pdelB...\n")
   pdelta.df.dframe <- pdelta.df[,c("delta.sek","pdelave.delta.delta")]
-  pdelave.delta.delta.cMass1 <- extractcMass.values(pdelta.df.dframe, cMass=cMasses[1], type=type)
-  pdelave.delta.delta.cMass2 <- extractcMass.values(pdelta.df.dframe, cMass=cMasses[2], type=type)
+  pdelave.delta.delta.cMass1 <- extractcMass.values(pdelta.df.dframe, cMass=cMasses[1], method=method)
+  pdelave.delta.delta.cMass2 <- extractcMass.values(pdelta.df.dframe, cMass=cMasses[2], method=method)
   
   #plot al three lines next to each other
   #plot(pdelta.df[,"delta.sek"],pdelta.df[,"pdelave"]/delta.delta, type="l", col="darkred")
@@ -1104,12 +1104,12 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
     #print(i)
     pb$tick()
     r <- r.sek[i]
-    if(type=="normal")
+    if(method=="normal")
     {
       pr.CD1D2I[[i]] <- integrate(fnrS, lower=sigma.low, upper=sigma.high)$value
-    } else if(type=="brob")
+    } else if(method=="brob")
     {
-      pr.CD1D2I[[i]] <- simpsonrule.nlb(fx=fnrS.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+      pr.CD1D2I[[i]] <- simpsonrule.nlb(fx=fnrS.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     }
     pr.CD1D2I.sum <- pr.CD1D2I.sum + pr.CD1D2I[[i]]
   }
@@ -1130,10 +1130,10 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   prA <- lapply(pr.CD1D2I, function(x) x/ (r.delta * pr.CD1D2I.sum))
   #prA
   # create dataframe with input and results
-  if(type=="normal")
+  if(method=="normal")
   {
     pr.df <- data.frame(r.sek, pr.CD1D2I = unlist(pr.CD1D2I), pr.CD1D2I.sign=NA, prA=unlist(prA), prA.sign=NA)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pr.df <- data.frame(r.sek = r.sek,
                         pr.CD1D2I = unlist(lapply(pr.CD1D2I,function(x) x@x)),
@@ -1202,12 +1202,12 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
     #print(i)
     pb$tick()
     r <- r.sek[i]
-    if(type=="normal")
+    if(method=="normal")
     {
       pr.CbarD1D2I[[i]] <- integrate(fnrSb, lower=sigma.low, upper=sigma.high)$value
-    } else if(type=="brob")
+    } else if(method=="brob")
     {
-      pr.CbarD1D2I[[i]] <- simpsonrule.nlb(fx=fnrSb.brob, lower=sigma.low, upper=sigma.high, type="brob", Nsteps=Nsteps)
+      pr.CbarD1D2I[[i]] <- simpsonrule.nlb(fx=fnrSb.brob, lower=sigma.low, upper=sigma.high, method="brob", Nsteps=Nsteps)
     }
     pr.CbarD1D2I.sum <- pr.CbarD1D2I.sum + pr.CbarD1D2I[[i]]
   }
@@ -1229,10 +1229,10 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   prB <- lapply(pr.CbarD1D2I, function(x) x/ (r.delta * pr.CbarD1D2I.sum))
   #prB
   # create dataframe with input and results
-  if(type=="normal")
+  if(method=="normal")
   {
     pr.df[,c("pr.CbarD1D2I","pr.CbarD1D2I.sign","prB","prB.sign")] <- data.frame(unlist(pr.CbarD1D2I), NA, prB = unlist(prB), NA)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pr.df[,c("pr.CbarD1D2I","pr.CbarD1D2I.sign","prB","prB.sign")] <- data.frame(
                         unlist(lapply(pr.CbarD1D2I,function(x) x@x)),
@@ -1260,11 +1260,11 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
 
   #pdelave = average of pdelA and pdelB
   cat("Calculate average of prA and prB...\n")
-  if(type=="normal")
+  if(method=="normal")
   {
     prave <- (pC * pr.df[,"prA"] + pCbar * pr.df[,"prB"])
     pr.df[,c("prave","prave.sign","prave.r.delta","prave.r.sign")] <- data.frame( as.numeric(prave / sum(prave)), NA, as.numeric(prave / sum(prave))/r.delta, NA)
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     pC.prA <- lapply(prA, function(x) x*pC)
     pCbar.prB <- lapply(prB, function(x) x*pCbar)
@@ -1284,8 +1284,8 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
   #create 89% and 96% HDI infos  
   cat("Calculate HDIs for the average of prA and prB...\n")
   prave.df.dframe <- pr.df[,c("r.sek","prave.r.delta")]
-  prave.r.delta.cMass1 <- extractcMass.values(prave.df.dframe, cMass=cMasses[1], type=type)
-  prave.r.delta.cMass2 <- extractcMass.values(prave.df.dframe, cMass=cMasses[2], type=type)
+  prave.r.delta.cMass1 <- extractcMass.values(prave.df.dframe, cMass=cMasses[1], method=method)
+  prave.r.delta.cMass2 <- extractcMass.values(prave.df.dframe, cMass=cMasses[2], method=method)
   
   # Here we plot  p(r|s,D1,D2,I), p(r|sbar,D1,D2,I) and their weighted average
   head(pdelta.df)
@@ -1304,14 +1304,14 @@ DiM.plot.calc.pg <- function(DiM.res, type="normal", fac.brob=1, cMasses=c(0.89,
 return(DiM.plotvalues.res)
 }
 #call:
-#DiM.plot.calc.pg(DIM.pg.res, type="normal")
+#DiM.plot.calc.pg(DIM.pg.res, method="normal")
 ################################################################################
 
 
 ################################################################################
 # PGplot
 DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0.2,
-                        filling=FALSE, by1=TRUE, colb="red", dig=2, type="normal")
+                        filling=FALSE, by1=TRUE, colb="red", dig=2, method="normal")
 {
 
   pdelta.df <- DiM.plotvalues.res[["pdelta.df"]]
@@ -1324,7 +1324,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
   cols.rgb <- col2rgb(cols[4:6])/255
   
   # dirty hack for graphical output
-  if(type=="brob")
+  if(method=="brob")
   {
     pr.df.minusInf <- list(names(pr.df))
     head(pr.df)
@@ -1340,13 +1340,13 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
     cat("\nIn table 'pr.df' (ratios) are values of '-Inf' - those will be replaced for the graphical output by the minimum value of those vectors\n")
     cat("Remember: exp(-Inf) = 0\n\n")
   }
-  #if(type=="normal") pr.df[INFid] <- -Inf
+  #if(method=="normal") pr.df[INFid] <- -Inf
   head(pr.df)
   
 ################################################################################
 # p(delta|S,D_1,D_2,I) problem
 # plot p(delta|S,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextA <- expression(paste("p(",delta," | S, D" ["1"] ,", D" ["2"] ,", I)",sep=""))
   } else y.axistextA <- expression(paste("p(",delta," | S, D" ["1"] ,", D" ["2"] ,", I) on log() scale",sep=""))
@@ -1374,7 +1374,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 ################################################################################
 # p(delta|Sbar,D_1,D_2,I) problem
 # plot p(delta|Sbar,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextB <- expression(paste("p(",delta," | ",bar(S),", D" ["1"] ,", D" ["2"] ,", I)",sep=""))
   } else y.axistextB <- expression(paste("p(",delta," | ",bar(S),", D" ["1"] ,", D" ["2"] ,", I) on log() scale",sep=""))
@@ -1402,7 +1402,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 ################################################################################
 # p(delta|D_1,D_2,I) problem
 # plot p(delta|v,D_1,D_2,I), p(delta|vbar,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextAB <- c("Probability Density")
   } else y.axistextAB <- c("Probability Density on log() scale")
@@ -1440,7 +1440,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 
   # add a nice legend with information
   delta.peak <- with( pdelta.df, delta.sek[which(pdelave == max(pdelave))])
-  if(type=="normal")
+  if(method=="normal")
   {
     delta.mean <- with( pdelta.df, pdelave %*% delta.sek )
     delta.mean.out <- round(delta.mean,dig)
@@ -1477,7 +1477,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 ################################################################################
 # p(r|C,D_1,D_2,I) problem
 # plot p(r|C,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextSA <- expression(paste("p(r | C, D" ["1"] ,", D" ["2"] ,", I)",sep=""))
   } else y.axistextSA <- expression(paste("p(r | C, D" ["1"] ,", D" ["2"] ,", I) on log() scale",sep=""))
@@ -1502,7 +1502,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 ################################################################################
 # p(r|Cbar,D_1,D_2,I) problem
 # plot p(r|Cbar,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextSB <- expression(paste("p(r | ",bar(C),", D" ["1"] ,", D" ["2"] ,", I)",sep=""))
   } else y.axistextSB <- expression(paste("p(r | ",bar(C),", D" ["1"] ,", D" ["2"] ,", I) on log() scale",sep=""))
@@ -1528,7 +1528,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 ################################################################################
 # p(r|D_1,D_2,I)
 # plot p(r|C,D_1,D_2,I), p(r|Cbar,D_1,D_2,I)
-  if(type=="normal")
+  if(method=="normal")
   {
     y.axistextSAB <- c("Probability Density")
   } else y.axistextSAB <- c("Probability Density on log() scale")
@@ -1567,7 +1567,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
 
   # add a nice legend with information
   r.peak <- with( pr.df, r.sek[which(prave == max(prave))])
-  if(type=="normal")
+  if(method=="normal")
   {
     r.mean <- with( pr.df, prave %*% r.sek)
     r.mean.out <- round(r.mean,dig)
@@ -1600,7 +1600,7 @@ DiM.plot.pg <- function(DiM.plotvalues.res, cols=NULL, fac=1.05, lwd=2, alphav=0
          col=cols[1:3], lty=c(2,3,1), lwd=lwd, bty="n", cex=0.9)
 }
 # call:
-# DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, type="brob")
+# DiM.plot.pg(DiM.plotvalues.res.nonbrob.brob, filling=TRUE, method="brob")
 ################################################################################
 
 

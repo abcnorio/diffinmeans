@@ -126,7 +126,7 @@ PMV.hypo.log <- function(NN,dd,upnum,lownum,sL,sH, Nsteps=100, ...)
     #logSumExp(logs)
     }
     pmv.log <- simpsonrule.nlb(integpmv.log, sL, sH,
-                               type="log",
+                               method="log",
                                Nsteps=Nsteps,
                                half=half)
     PMV.log <- pmv.log - log( sqrt(2*NN) )
@@ -145,7 +145,7 @@ PMV.hypo.brob <- function(NN,dd,upnum,lownum,sL,sH, Nsteps=100, ...)
       ( gamma_inc_gen(a=1/2,z0=0,z1=upnum/(2*s^2),log=TRUE)*sqrt(pi) +
         gamma_inc_gen(a=1/2,z0=0,z1=lownum/(2*s^2),log=TRUE)*sqrt(pi) )
   }
-  pmv.brob <- simpsonrule.nlb(integpmv.brob, sL, sH, type="brob",Nsteps=Nsteps)
+  pmv.brob <- simpsonrule.nlb(integpmv.brob, sL, sH, method="brob",Nsteps=Nsteps)
   PMV.brob <- pmv.brob / sqrt(2*NN)
 return(PMV.brob)
 }
@@ -219,7 +219,7 @@ PMbarV.hypo.log <- function(NN,zz,dd,upinum,lowinum,sL,sH,H,L,Ni,Nii, Nsteps=100
   pmbarv.log <- simpsonrule.nlb(integpmbarv.log, sL, sH,
                                 sqrtpi.log=sqrtpi.log,
                                 half=half,
-                                type="log", Nsteps=Nsteps)
+                                method="log", Nsteps=Nsteps)
   #PMbarV <- pmbarv / (2*(H-L) * sqrt(Ni*Nii))
   PMbarV.log <- pmbarv.log - ( log(2*(H-L)) +
                 (1/2)*( log(Ni) + log(Nii)) ) #log(sqrt(Ni*Nii)) )
@@ -239,7 +239,7 @@ PMbarV.hypo.brob <- function(NN,zz,dd,upinum,lowinum,sL,sH,H,L,Ni,Nii, Nsteps=10
       ( pgamma(upiinum/(2*s^2),1/2)*gamma(1/2) + pgamma(lowiinum/(2*s^2),1/2)*gamma(1/2) )
   }
   #    pmbarv.brob <- simpsonrule.brob(fx=integpmbarv.brob, sL=sL, sH=sH, Nsteps=Nsteps)
-  pmbarv.brob <- simpsonrule.nlb(fx=integpmbarv.brob, sL, sH, type="brob",Nsteps=Nsteps)
+  pmbarv.brob <- simpsonrule.nlb(fx=integpmbarv.brob, sL, sH, method="brob",Nsteps=Nsteps)
   PMbarV.brob <- pmbarv.brob / (2*(H-L) * sqrt(Ni*Nii))
 return(PMbarV.brob)  
 }  
@@ -325,7 +325,7 @@ PMVbar.hypo.log <- function(Dsi,Dsii,sL,sH,H,L,Ni,Nii, Nsteps=100, ...)
                                 Ni.2=Ni.2, Nii.2=Nii.2,
                                 g.Ni.2=g.Ni.2,
                                 g.Ni.2=g.Nii.2,
-                                type="log", Nsteps=Nsteps)
+                                method="log", Nsteps=Nsteps)
   PMVbar.log <- pmvbar.log - ( log(4) + log( log(sH/sL) ) )
 return(PMVbar.log)  
 }  
@@ -351,7 +351,7 @@ PMVbar.hypo.brob <- function(Dsi,Dsii,sL,sH,H,L,Ni,Nii, Nsteps=100, ...)
     )
   }
   #pmvbar.brob <- simpsonrule.brob(fx=integpmvbar.brob, sL=L, sH=H, Nsteps=Nsteps)
-  pmvbar.brob <- simpsonrule.nlb(fx=integpmvbar.brob, L, H, type="brob", Nsteps=Nsteps)
+  pmvbar.brob <- simpsonrule.nlb(fx=integpmvbar.brob, L, H, method="brob", Nsteps=Nsteps)
   PMVbar.brob <- pmvbar.brob / (4*log(sH/sL))    
 return(PMVbar.brob)
 }
@@ -487,14 +487,14 @@ PMbarVbar.hypo.log <- function(Dsi,Dsii,sL,sH,H,L,Ni,Nii, Nsteps=100, ...)
                                     Ni.2=Ni.2,
                                     sL.2=sL.2, sH.2=sH.2,
                                     sL=sL, sH=sH,
-                                    type="log", Nsteps=Nsteps)
+                                    method="log", Nsteps=Nsteps)
   pmbarvbar2.log <- simpsonrule.nlb(integpmbarvbar2.log,
                                     lower=L, upper=H,
                                     lg.Ni.2=lg.Ni.2,
                                     Ni.2=Ni.2,
                                     sL.2=sL.2, sH.2=sH.2,
                                     sL=sL, sH=sH,
-                                    type="log", Nsteps=Nsteps)
+                                    method="log", Nsteps=Nsteps)
     
   #pmbarvbar <- pmbarvbar1 * pmbarvbar2
   #PMbarVbar <- pmbarvbar / (4*(H-L) * log(sH/sL))
@@ -534,8 +534,8 @@ PMbarVbar.hypo.brob <- function(Dsi,Dsii,sL,sH,H,L,Ni,Nii, Nsteps=100, ...)
   #pmbarvbar1.brob <- simpsonrule.brob(fx=integpmbarvbar1.brob, sL=L, sH=H, Nsteps=Nsteps)
   #pmbarvbar2.brob <- simpsonrule.brob(fx=integpmbarvbar2.brob, sL=L, sH=H, Nsteps=Nsteps)
     
-  pmbarvbar1.brob <- simpsonrule.nlb(fx=integpmbarvbar1.brob, L, H, type="brob", Nsteps=Nsteps)
-  pmbarvbar2.brob <- simpsonrule.nlb(fx=integpmbarvbar2.brob, L, H, type="brob", Nsteps=Nsteps)
+  pmbarvbar1.brob <- simpsonrule.nlb(fx=integpmbarvbar1.brob, L, H, method="brob", Nsteps=Nsteps)
+  pmbarvbar2.brob <- simpsonrule.nlb(fx=integpmbarvbar2.brob, L, H, method="brob", Nsteps=Nsteps)
     
   pmbarvbar.brob <- pmbarvbar1.brob * pmbarvbar2.brob
   PMbarVbar.brob <- pmbarvbar.brob / (4*(H-L) * log(sH/sL))
@@ -639,7 +639,7 @@ return(res)
 # calculate the four integrals
 # PMV, PMbarV, PMVbar, PMbarVbar
 .DiM_callintegrals <- function(DiM.ccs,
-                               type="normal",
+                               method="normal",
                                Nsteps=100,
                                parallel=FALSE
                               )
@@ -687,7 +687,7 @@ return(res)
   # lower=FALSE for new simpsonrule.nlb!!!  
 
   # calculate integrals  
-  if(type=="normal")
+  if(method=="normal")
   {
     cat("\nWork based on normal values\n")
     cat("\nCalculate PMV\n")
@@ -699,7 +699,7 @@ return(res)
     cat("Calculate PMbarVbar\n")
     PMbarVbar <- PMbarVbar.hypo(Dsi=Dsi, Dsii=Dsii, sL=sL, sH=sH, H=H, L=L, Ni=Ni, Nii=Nii)
 
-  } else if(type=="log")
+  } else if(method=="log")
   {
     cat("\nWork based on log values\n")
     if(parallel) require(parallel)
@@ -713,7 +713,7 @@ return(res)
     cat("Calculate PMbarVbar\n")
     PMbarVbar <- PMbarVbar.hypo.log(Dsi=Dsi, Dsii=Dsii, sL=sL, sH=sH, H=H, L=L, Ni=Ni, Nii=Nii, Nsteps=Nsteps)
 
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     cat("\nWork based on Brobdingnag values\n")
     require(Brobdingnag)
@@ -743,22 +743,22 @@ return(DiM.integrals)
 ################################################################################
 # compile results bsed on the four integrals
 .DiM_prepres <- function(DiM.integrals,
-                         type=NA,
+                         method=NA,
                          convback=FALSE, # convert probs back from log-scale
                          percfac=1, # not 100% but sum(ps) = 1
                          dig=5
                         )
 {
   
-  stopifnot(!is.na(type))
+  stopifnot(!is.na(method))
   
-  if(type=="normal" && convback==TRUE)
+  if(method=="normal" && convback==TRUE)
   {
     cat("\nTYPE=normal & convback=TRUE -> no conversion\nwill be done for values on the normal-scale.\n\n")
     convback <- FALSE
   }
   
-  if(type=="normal")
+  if(method=="normal")
   {
     denom <- sum(DiM.integrals) # PMV, PMbarV, PMVbar, PMbarVbar
     cc <- 1 / denom
@@ -783,7 +783,7 @@ return(DiM.integrals)
     OR.diffsets <- diffsets/mv
     OR.samesets <- mv/diffsets
 
-  } else if(type=="log")
+  } else if(method=="log")
   {
     denom <- .llog.2add.short( DiM.integrals )
     #.llog.2add.short(c(PMV, PMbarV, PMVbar, PMbarVbar))
@@ -811,7 +811,7 @@ return(DiM.integrals)
     OR.diffsets <- diffsets - mv
     OR.samesets <- mv - diffsets
   
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
     # calculate total probability (denominator of Bayes' Theorem)
     # sum of all four hypotheses (probabilities)
@@ -875,21 +875,21 @@ return(DiM.integrals)
   names(diffsame.terms) <- diff.v
 
   # diff greater/ same for means/vars/sets  
-  if(type=="normal")
+  if(method=="normal")
   {
     diffgreaterthansame <- DiM.probsOR.res[ diff.v ] > DiM.probsOR.res[ same.v ]
     diffbysame <- DiM.probsOR.res[ diff.v ] / DiM.probsOR.res[ same.v ]
     diffbysame.ID <- which(diffgreaterthansame == FALSE)
     if(length(diffbysame.ID) > 0) diffbysame[ diffbysame.ID ] <- 1 / diffbysame[ diffbysame.ID ]
 
-  } else if(type=="log")
+  } else if(method=="log")
   {
     diffgreaterthansame <- DiM.probsOR.res[ diff.v ] > DiM.probsOR.res[ same.v ]
     diffbysame <- DiM.probsOR.res[ diff.v ] - DiM.probsOR.res[ same.v ]
     diffbysame.ID <- which(diffgreaterthansame == FALSE)
     if(length(diffbysame.ID) > 0) diffbysame[ diffbysame.ID ] <- log(1) - diffbysame[ diffbysame.ID ]
     
-  } else if(type=="brob")
+  } else if(method=="brob")
   {
 
     diffbysame <- sapply(seq_along(1:length(diff.v)), function(i)
@@ -925,16 +925,16 @@ return(DiM.integrals)
   DiM.probsOR.orig <- c(DiM.integrals.ext, DiM.probsOR.res, diffbysame)
   
   # convert back to normal scale (log, brob) - but not case normal
-  if(convback==FALSE || type=="normal")
+  if(convback==FALSE || method=="normal")
   {
-    cat("\nMethod = ",type,"\nconvback = ",convback,"\n\nProbabilities and Odds Ratios (= OR) will not be\nconverted from log-scale back to non-log-scale.\n\n",sep="")
+    cat("\nMethod = ",method,"\nconvback = ",convback,"\n\nProbabilities and Odds Ratios (= OR) will not be\nconverted from log-scale back to non-log-scale.\n\n",sep="")
     DiM.probsOR.exp <- NA
   } else
   {
-    if(type=="brob")
+    if(method=="brob")
     {
       DiM.probsOR.exp <- sapply(DiM.probsOR.orig, as.numeric)
-    } else if(type=="log")
+    } else if(method=="log")
     {
       DiM.probsOR.exp <- exp(DiM.probsOR.orig)
     }
@@ -945,22 +945,22 @@ return(DiM.integrals)
   if(!is.na(DiM.probsOR.exp[1])) names(DiM.probsOR.exp) <- names(DiM.probsOR.orig)
 
   # table/ dataframe with resulting probabilities
-  if(type=="brob")
+  if(method=="brob")
   {
     p.H.D1D2I <- brobgiveback(DiM.probsOR.res[1:10])
     ORs <- sapply(DiM.probsOR.res[11:16], Brobdingnag:::getX)
     ORs <- brobgiveback(DiM.probsOR.res[11:16])
-  } else if(type %in% c("normal","log"))
+  } else if(method %in% c("normal","log"))
   {
     p.H.D1D2I <- DiM.probsOR.res[1:10]
     ORs <- DiM.probsOR.res[11:16]
   } else
   {
-    stop("Unknown type=",type)
+    stop("Unknown method=",method)
   }
 
   # TRUE for log and brob
-  cat("\nMethod = ",type,"\nconvback = ",convback,"\n\n",sep="")
+  cat("\nMethod = ",method,"\nconvback = ",convback,"\n\n",sep="")
   tempnams <- c(rep("integrals (unnormalized)",4),
                 c("cc","denom"),
                 rep("integrals (normalized)",4),
@@ -970,7 +970,7 @@ return(DiM.integrals)
                 )
     
   # give out table to show conversion log/ brob back to normal
-  if(type=="brob") 
+  if(method=="brob") 
   {
     proutvalues <-brobgiveback(DiM.probsOR.orig)
   } else
@@ -1006,7 +1006,7 @@ return(DiM.integrals)
                               check.names = FALSE
                              )
 
-  if(type == "brob") diffbysame <- brobgiveback(diffbysame)
+  if(method == "brob") diffbysame <- brobgiveback(diffbysame)
   DiM.diffvssame.df <- data.frame("Odds Ratio - Hypothesis in favor of ..." =diff.t,
                                   "Odds Ratio (OR)"=diffbysame,
                                   check.names=FALSE
@@ -1016,7 +1016,7 @@ return(DiM.integrals)
   # infinity check
 
   # Inf test
-  if(type=="brob")
+  if(method=="brob")
   {
     DiM.probs.inf.tf <- sapply(DiM.probsOR.exp, is.infinite) 
   } else # log or normal
@@ -1048,7 +1048,7 @@ return(DiM.integrals)
               diffsame.terms=diffsame.terms,
               percfac=percfac,
               convback=convback,
-              type=type,
+              method=method,
               res.short=res.short #,
               #diffbysame=diffbysame,
               #diffbysame.exp=diffbysame.exp,
@@ -1144,18 +1144,18 @@ DiM <- function(initials=NA,
   
   # calculate main integrals
   cat("\nCalculate main integrals:\n")
-  DiM.integrals <- .DiM_callintegrals(DiM.ccs, type=cmethod)
+  DiM.integrals <- .DiM_callintegrals(DiM.ccs, method=cmethod)
   
   # prepare output values and handle conversion back to normal
   # in case of different method etc
   cat("\nPrepare probabilities of the hypotheses.\n")
-  DiM.out <- .DiM_prepres(DiM.integrals, type=cmethod, convback=convback, percfac=percfac, dig=dig)
+  DiM.out <- .DiM_prepres(DiM.integrals, method=cmethod, convback=convback, percfac=percfac, dig=dig)
   
   # print nice output
   if(prout == "long")
   {
     cat("\nPreparing nice long output.\n")
-    UMSprint(DiM.out, inval=inval, dig=dig)
+    UMSprint(results=DiM.out, ccs=DiM.ccs, inval=inval, dig=dig)
   } else if(prout == "short")
   {
     cat("\nPreparing short and efficient output.\n")
@@ -1288,10 +1288,10 @@ UMSplot <- function(inval, dig=4, pdfout=FALSE, legendplace="topleft",
 
 ################################################################################
 # print out DiM results - long version
-UMSprint <- function(results, inval, dig=3)
+UMSprint <- function(results, ccs, inval, dig=3)
 {
-  type <- results[["type"]]
-  consts <- DiM.ccs[["constants"]]
+  method <- results[["method"]]
+  consts <- ccs[["constants"]]
   consts.out <- signif( consts[,-c(1,2)], digits=dig )
   convback <- results[["convback"]]
     
@@ -1303,21 +1303,21 @@ UMSprint <- function(results, inval, dig=3)
     srib.base <- FALSE
   }
 
-  if(type %in% c("log","brob") && convback == TRUE)
+  if(method %in% c("log","brob") && convback == TRUE)
   {
     res.out <- signif( results$DiM.probsOR.exp, digits=dig)
-  } else if( type == "log" && convback == FALSE)
+  } else if( method == "log" && convback == FALSE)
   {
     res.out <- paste("exp(", signif( results$DiM.probsOR.orig, digits=dig), ")", sep="")
     names(res.out) <- names(results$DiM.probsOR.orig)
-  } else if(type == "brob" && convback == FALSE)
+  } else if(method == "brob" && convback == FALSE)
   {
     # as vector and character, we won't calculate anything anymore
     # just output
     if(dig < 5) dig <- 5
     res.out <- brobgiveback(results$DiM.probsOR.orig)
     #diffbysame <- brobgiveback(results$diffbysame)
-  } else if(type == "normal")
+  } else if(method == "normal")
   {
     res.out <- signif( results$DiM.probsOR.orig, digits=dig)
   }
@@ -1330,7 +1330,7 @@ UMSprint <- function(results, inval, dig=3)
   cat("###\n### methods = normal, log, brob\n### log and brob are for large numbers and infinity errors\n")
   cat("\nNote:\nIf any probability is printed as '1' (= one) or '0' (= zero), it means that the\nprobability is practically that value by giving respect to limited computer precision.\n")
 
-  cat("\n...based on METHOD = ",type," and CONVBACK = ",convback,"\n\n",sep="")
+  cat("\n...based on METHOD = ",method," and CONVBACK = ",convback,"\n\n",sep="")
 
   # data (input) = descriptive statistics
   cat("\n-------------------------------- Data (Input) ------------------------------------------\n\n")
@@ -1400,7 +1400,7 @@ UMSprint <- function(results, inval, dig=3)
 .DiM_prout.short <- function(DiM.prout.short, DiM.ccs, dig=3)
 {
 
-  cat("\nShort output of 'the difference in means' based on method = ",DiM.prout.short$type,":\n",sep="")
+  cat("\nShort output of 'the difference in means' based on method = ",DiM.prout.short$method,":\n",sep="")
   cat("\nValues were converted back to normal = ",DiM.prout.short$convback,"\n\n",sep="")
   print(DiM.ccs$input.df, right=FALSE, row.names=FALSE, digits=dig)
   cat(paste("\n"))
@@ -1414,7 +1414,7 @@ UMSprint <- function(results, inval, dig=3)
   print(DiM.prout.short$DiM.diffvssame.df, right=FALSE, row.names=FALSE, digits=dig)
   cat(paste("\n"))
   
-  if(DiM.prout.short$type != "normal" && DiM.prout.short$convback==TRUE)
+  if(DiM.prout.short$method != "normal" && DiM.prout.short$convback==TRUE)
   {
     cat("\nconvback == TRUE, values based on exp(x):\n")
     print( data.frame("exp(x)"=DiM.prout.short$DiM.probsOR.exp[1:6], check.names=FALSE), digits=dig)
@@ -1495,6 +1495,7 @@ DiM.quan.plot <- function(stype=NA,
                           simulate=FALSE, # makes only sense if no raw values are present
                           seed=9999,
                           fac.ext=0.1,
+                          leg.sumstats="h", #v -> print out vertical/horizontal summary statistics
                           dig=2, pdfout=FALSE, legendplace="left"
                           )
 {
@@ -1602,7 +1603,7 @@ DiM.quan.plot <- function(stype=NA,
         3, line=0.5, cex=1)
   mtext(expression(paste(delta," = ", mu["1"]," - ",mu["2"])), 1, line=3, cex=1.5)
 
-  if(sumstats == "v") # vertical
+  if(leg.sumstats == "v") # vertical
   {    
     mtext(eval(substitute(expression(paste(bar(x)["1"] ," = ",Di," | ",
                                            sigma["1"] ," = ",si, " | ",
@@ -1618,7 +1619,7 @@ DiM.quan.plot <- function(stype=NA,
                                sii=round(lv.stats[2,"sd"],dig),
                                n2=n2))),
                           4,line=0, cex=0.9)
-  } else if(sumstats == "h") # horizontal
+  } else if(leg.sumstats == "h") # horizontal
   {
     # alternative: add another nice legend with information
     legend("right", legend=c(eval(substitute(expression(paste(bar(x)["1"] ," = ",Di)),list(Di=round(lv.stats[1,"mean"],dig)))),
