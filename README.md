@@ -339,9 +339,9 @@ DiM.print.pg(DIM.pg.res.brob)
 
 which gives the output:
 
-<output>
+<details>
 
-<summary>Results></summary>
+<summary>Results</summary>
 
 ```
 ##########################################################################
@@ -397,7 +397,7 @@ Total Probability:	exp(881.156) [sign=TRUE]
 
 ##########################################################################
 ```
-</output>
+</details>
 
 Obviously there are "certain probabilities," ie. probabilities that are on the numerical level around zero or one and therefor at the limits.
 Let's go back to tweak the graphical output limits - this touches only the standard deviation ratio, not the difference in means:
