@@ -108,9 +108,9 @@ UMSplot(inval=inval)
 
 This results in:
 
-<output>
+<details>
 
-<summary>Results></summary>
+<summary>Results</summary>
 
 ```
 #########################################################################################
@@ -177,7 +177,7 @@ The odds ratio is 3.93 to 1 in favor of different means and/ or variances.
 
 #########################################################################################
 ```
-</output>
+</details>
 
 One can do that shorter with less calls:
 
