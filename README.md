@@ -103,7 +103,7 @@ UMSplot(inval=inval)
 <details>
 
 <summary>posterior probabilities</summary>
-![alt text](https://github.com/abcnorio/diffinmeans/plots/input_qual/e3811349-86f9-455a-817a-b78dc8a1dc70.png?raw=true)
+![Alt text](./plots/input_qual/e3811349-86f9-455a-817a-b78dc8a1dc70.png?raw=true)
 </details>
 
 
