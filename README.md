@@ -102,7 +102,6 @@ UMSplot(inval=inval)
 
 ![Alt text](./plots/input_qual/e3811349-86f9-455a-817a-b78dc8a1dc70.png?raw=true)
 
-
 This results in:
 
 <details>
@@ -247,12 +246,16 @@ DiM.print.pg(dim.res)
 # extract limits for plot
 DiM.extract.limits(dim.res.newlimits, change=FALSE)
 
-# cacöulate plot values
-dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, BROB=FALSE)
+# calculate plot values
+dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, method="normal")
 
 # plot results
-DiM.plot.pg(dim.res.calc, filling=FALSE, BROB=FALSE)
+DiM.plot.pg(dim.res.calc, filling=FALSE, method="normal")
 ```
+
+| ![Alt text](./plots/posterior_normal/d300ffd9-e051-41cd-8e58-60cb38013ec3.png?raw=true) | ![Alt text](./plots/posterior_normal/a43e1533-25a3-4c4d-b6d4-e3a7d4146418.png?raw=true) |
+| ![Alt text](./plots/posterior_normal/0c514fc4-f905-4627-8adf-c4a9365d44cd.png?raw=true) | ![Alt text](./plots/posterior_normal/20f92135-c6c5-4cf7-a30a-2e62158650ef.png?raw=true) |
+| ![Alt text](./plots/posterior_normal/6fb27e9c-b782-494b-8104-6ea168821720.png?raw=true) | ![Alt text](./plots/posterior_normal/07d41ec0-8d78-47e0-a451-1129f8c3439d.png?raw=true) |
 
 One can convert input values to be used within the other script.
 
@@ -297,6 +300,8 @@ DiM.res <- DiM(initials=res.SIB.NRFtotal, cinput="qual", cmethod="log", prout="l
 UMSplot(inval=res.SIB.NRFtotal, pdfout=FALSE)
 ```
 
+![Alt text](./plots/input_qual_large/470180e5-f4de-4fa0-80d1-4da5139ae592.png?raw=true)
+
 Looking at the plot makes it obvious why it fails - the differences with respect to means and standard deviations are clear. As a consequence it is very likely that very large numbers will occur at least temporarily during calculations or even as a result. But it should work nevertheless, because the results are human readable again as proabilities are bound between zero and one.
 
 Be aware that the output of log values (log, brob) contains now the sign of the results exp(x). This is implemented for the UMS as well as for the PG version. This work solely on the log level avoids the problem of infinite values. However, thinking in probabilities becomes challenging if they are represented on the log scale. So a rule of thumb is that very large numbers either near zero or up to infinity just mark the limits of probabilities: zero or one. Both probabilities point towards very certain outcomes so that the exact probability here is of less importance. The corresponding odds ratios can achieve huge numbers, but one should not take those too serious - like we do not take very small p-values in classical statistics too serious. Better is to remember that the size of effects can be
@@ -327,6 +332,50 @@ The quantitative one with `DiM.quan.plot` plots density plots of input values of
 - raw values
 - summary statistics (mean, sd, N) based on simulation from normal distribution using `rnorm`
 - summary statistics (mean, sd, N) based on densities taken from normal distribution using `dnorm`
+
+This looks like
+
+
+```
+# example 1
+# UMS, s.a.
+
+# initial values
+initials <- list(Ni=15, Di=0.7058824, si=0.1073966, Nii=16, Dii=0.6111111, sii=0.1118397,
+                 L=0.05, H=0.95, sL=0.052, sH=0.118, snames=c("voluntary","non-voluntary"))
+
+attach(initials)
+xbar1 <- Di
+sd1 <- si
+n1 <- Ni
+xbar2 <- Dii
+sd2 <- sii
+n2 <- Nii
+groupnames <- snames
+detach(initials)
+
+# plots
+
+# summary statistics, no simulation
+DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1, xbar2=xbar2, sd2=sd2, n2=n2, simulate=FALSE, groupnames=groupnames)
+
+# summary statistics, simulation
+DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1, xbar2=xbar2, sd2=sd2, n2=n2, simulate=TRUE, groupnames=groupnames)
+
+# larger sample size for simulation
+nfac <- 100
+DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1*nfac, xbar2=xbar2, sd2=sd2, n2=n2*nfac, simulate=TRUE, groupnames=groupnames)
+
+# simulate values and plot them as raw
+set.seed(1423)
+v1 <- rnorm(n=n1, mean=xbar1, sd=sd1)
+v2 <- rnorm(n=n2, mean=xbar2, sd=sd2)
+DiM.quan.plot(stype="raw", v1=v1, v2=v2, groupnames=groupnames)
+```
+
+| ![Alt text](./plots/input_quan/22d28ac1-7925-4043-b09d-4664f0d1bbec.png?raw=true) | ![Alt text](./plots/input_quan/b4c55598-1a13-4a15-afb5-968e380c6f5f.png?raw=true) |
+| ![Alt text](./plots/input_quan/8020f566-37eb-47f1-bd57-a970ad451647.png?raw=true) | ![Alt text](./plots/input_quan/91fb2066-e7cd-445a-a0cb-b03124836d22.png?raw=true) |
+
 
 And the posterior plots via `DiM.plot.pg` are plotted in the following order:
 
@@ -455,7 +504,11 @@ and we plot the result on the log scale.
 ```
 # plot results as usual
 DiM.plot.pg(DiM.newlimits.calc.plot, filling=TRUE, by1=TRUE, method="brob")
+
 ```
+|![Alt text](./plots/posterior_brob/d4a2b66d-109c-4992-bfed-5f682008dd9d.png?raw=true) | |![Alt text](./plots/posterior_brob/51d5da0e-2029-409b-8d41-110eaf6cfac2.png?raw=true) |
+|![Alt text](./plots/posterior_brob/84152313-715c-471b-af7b-a9b8be98dc7a.png?raw=true) | |![Alt text](./plots/posterior_brob/7d68774d-fe46-4c73-b32b-1cea9c1d27e8.png?raw=true) |
+|![Alt text](./plots/posterior_brob/0e94d647-fd6c-4970-af36-355ba835cece.png?raw=true) | |![Alt text](./plots/posterior_brob/c2eb8b9a-ccaa-47fd-89e3-051f8aafb868.png?raw=true) |
 
 In our case it gives out a warning which we keep in mind while looking on the plots:
 
