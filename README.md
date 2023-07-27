@@ -513,11 +513,12 @@ and we plot the result on the log scale.
 DiM.plot.pg(DiM.newlimits.calc.plot, filling=TRUE, by1=TRUE, method="brob")
 
 ```
+
 | mean difference | standard deviation ratio |
 | --- | --- |
-|![Alt text](./plots/posterior_brob/d4a2b66d-109c-4992-bfed-5f682008dd9d.png?raw=true) | |![Alt text](./plots/posterior_brob/51d5da0e-2029-409b-8d41-110eaf6cfac2.png?raw=true) |
-|![Alt text](./plots/posterior_brob/84152313-715c-471b-af7b-a9b8be98dc7a.png?raw=true) | |![Alt text](./plots/posterior_brob/7d68774d-fe46-4c73-b32b-1cea9c1d27e8.png?raw=true) |
-|![Alt text](./plots/posterior_brob/0e94d647-fd6c-4970-af36-355ba835cece.png?raw=true) | |![Alt text](./plots/posterior_brob/c2eb8b9a-ccaa-47fd-89e3-051f8aafb868.png?raw=true) |
+| ![Alt text](./plots/posterior_brob/d4a2b66d-109c-4992-bfed-5f682008dd9d.png?raw=true) | ![Alt text](./plots/posterior_brob/51d5da0e-2029-409b-8d41-110eaf6cfac2.png?raw=true) |
+| ![Alt text](./plots/posterior_brob/84152313-715c-471b-af7b-a9b8be98dc7a.png?raw=true) | ![Alt text](./plots/posterior_brob/7d68774d-fe46-4c73-b32b-1cea9c1d27e8.png?raw=true) |
+| ![Alt text](./plots/posterior_brob/0e94d647-fd6c-4970-af36-355ba835cece.png?raw=true) | ![Alt text](./plots/posterior_brob/c2eb8b9a-ccaa-47fd-89e3-051f8aafb868.png?raw=true) |
 
 In our case it gives out a warning which we keep in mind while looking on the plots:
 
