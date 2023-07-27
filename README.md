@@ -94,7 +94,7 @@ DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, method="normal")
 DiM.out <- .DiM_prepres(DiM.integrals.normal, method="normal", percfac=1)
 
 # output results (long version)
-UMSprint(DiM.out, inval=inval, dig=3)
+UMSprint(results=DiM.out, ccs=DiM.ccs, inval=inval, dig=3)
 
 # plot qualitative view based on initials values
 UMSplot(inval=inval)
