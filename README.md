@@ -87,11 +87,11 @@ inval <- SucRatesIntBounds(Si=11, Ni=15, Sii=10, Nii=16, smin=0, snames=c("male"
 DiM.ccs <- .DiM_ccs(inval=inval)
 
 # calculate the four integrals
-DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, type="normal")
+DiM.integrals.normal <- .DiM_callintegrals(DiM.ccs, method="normal")
 
 # calculate posterior porbabilities of the difference in means (UMS version)
 # and prepare results
-DiM.out <- .DiM_prepres(DiM.integrals.normal, type="normal", percfac=1)
+DiM.out <- .DiM_prepres(DiM.integrals.normal, method="normal", percfac=1)
 
 # output results (long version)
 UMSprint(DiM.out, inval=inval, dig=3)
@@ -343,7 +343,7 @@ Example:
 res.SIB.NRFtotal
 
 # calculate posteriors
-DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, type="brob")
+DIM.pg.res.brob <- DiM.pg(invtyp="ums", inputvalues=res.SIB.NRFtotal, print.res=TRUE, method="brob")
 
 # look at the results:
 DiM.print.pg(DIM.pg.res.brob)
@@ -426,7 +426,7 @@ DiM.newlimits <- DiM.extract.limits(DIM.pg.res.brob, scaleL=5, scaleH=2, change=
 DiM.extract.limits(DiM.newlimits, change=FALSE)
 
 # calculate plot values - this requires time ...
-DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, type="brob")
+DiM.newlimits.calc.plot <- DiM.plot.calc.pg(DiM.newlimits, method="brob")
 ```
 
 The last command gives the following output:
@@ -451,7 +451,7 @@ and we plot the result on the log scale.
 
 ```
 # plot results as usual
-DiM.plot.pg(DiM.newlimits.calc.plot, filling=TRUE, by1=TRUE, type="brob")
+DiM.plot.pg(DiM.newlimits.calc.plot, filling=TRUE, by1=TRUE, method="brob")
 ```
 
 In our case it gives out a warning which we keep in mind while looking on the plots:
