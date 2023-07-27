@@ -253,7 +253,7 @@ dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, method="normal")
 DiM.plot.pg(dim.res.calc, filling=FALSE, method="normal")
 ```
 
-| Function | Description |
+| mean difference | standard deviation ratio |
 | --- | --- |
 | ![Alt text](./plots/posterior_normal/d300ffd9-e051-41cd-8e58-60cb38013ec3.png?raw=true) | ![Alt text](./plots/posterior_normal/a43e1533-25a3-4c4d-b6d4-e3a7d4146418.png?raw=true) |
 | ![Alt text](./plots/posterior_normal/0c514fc4-f905-4627-8adf-c4a9365d44cd.png?raw=true) | ![Alt text](./plots/posterior_normal/20f92135-c6c5-4cf7-a30a-2e62158650ef.png?raw=true) |
@@ -375,8 +375,13 @@ v2 <- rnorm(n=n2, mean=xbar2, sd=sd2)
 DiM.quan.plot(stype="raw", v1=v1, v2=v2, groupnames=groupnames)
 ```
 
-| ![Alt text](./plots/input_quan/22d28ac1-7925-4043-b09d-4664f0d1bbec.png?raw=true) | ![Alt text](./plots/input_quan/b4c55598-1a13-4a15-afb5-968e380c6f5f.png?raw=true) |
-| ![Alt text](./plots/input_quan/8020f566-37eb-47f1-bd57-a970ad451647.png?raw=true) | ![Alt text](./plots/input_quan/91fb2066-e7cd-445a-a0cb-b03124836d22.png?raw=true) |
+| Plot summary statistics | and raw/ simulate values |
+| --- | --- |
+| summary statistics and dnorm | raw values |
+| ![Alt text](./plots/input_quan/22d28ac1-7925-4043-b09d-4664f0d1bbec.png?raw=true) | ![Alt text](./plots/input_quan/91fb2066-e7cd-445a-a0cb-b03124836d22.png?raw=true) |
+| simulation (rnorm) | simulation (rnorm, larger sample size) |
+| ![Alt text](./plots/input_quan/b4c55598-1a13-4a15-afb5-968e380c6f5f.png?raw=true) | ![Alt text](./plots/input_quan/8020f566-37eb-47f1-bd57-a970ad451647.png?raw=true) |
+
 
 
 And the posterior plots via `DiM.plot.pg` are plotted in the following order:
@@ -508,6 +513,8 @@ and we plot the result on the log scale.
 DiM.plot.pg(DiM.newlimits.calc.plot, filling=TRUE, by1=TRUE, method="brob")
 
 ```
+| mean difference | standard deviation ratio |
+| --- | --- |
 |![Alt text](./plots/posterior_brob/d4a2b66d-109c-4992-bfed-5f682008dd9d.png?raw=true) | |![Alt text](./plots/posterior_brob/51d5da0e-2029-409b-8d41-110eaf6cfac2.png?raw=true) |
 |![Alt text](./plots/posterior_brob/84152313-715c-471b-af7b-a9b8be98dc7a.png?raw=true) | |![Alt text](./plots/posterior_brob/7d68774d-fe46-4c73-b32b-1cea9c1d27e8.png?raw=true) |
 |![Alt text](./plots/posterior_brob/0e94d647-fd6c-4970-af36-355ba835cece.png?raw=true) | |![Alt text](./plots/posterior_brob/c2eb8b9a-ccaa-47fd-89e3-051f8aafb868.png?raw=true) |
