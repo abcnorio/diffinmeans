@@ -253,8 +253,8 @@ dim.res.calc <- DiM.plot.calc.pg(dim.res.newlimits, method="normal")
 DiM.plot.pg(dim.res.calc, filling=FALSE, method="normal")
 ```
 
-| a | b |
-| --- | --- | --- |
+| Function | Description |
+| --- | --- |
 | ![Alt text](./plots/posterior_normal/d300ffd9-e051-41cd-8e58-60cb38013ec3.png?raw=true) | ![Alt text](./plots/posterior_normal/a43e1533-25a3-4c4d-b6d4-e3a7d4146418.png?raw=true) |
 | ![Alt text](./plots/posterior_normal/0c514fc4-f905-4627-8adf-c4a9365d44cd.png?raw=true) | ![Alt text](./plots/posterior_normal/20f92135-c6c5-4cf7-a30a-2e62158650ef.png?raw=true) |
 | ![Alt text](./plots/posterior_normal/6fb27e9c-b782-494b-8104-6ea168821720.png?raw=true) | ![Alt text](./plots/posterior_normal/07d41ec0-8d78-47e0-a451-1129f8c3439d.png?raw=true) |
