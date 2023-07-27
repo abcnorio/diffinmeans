@@ -192,10 +192,19 @@ sd2
 n2
 groupnames
 
+# summary statistics, no simulation
 DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1, xbar2=xbar2, sd2=sd2, n2=n2, simulate=FALSE, groupnames=groupnames)
+# summary statistics, simulation
 DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1, xbar2=xbar2, sd2=sd2, n2=n2, simulate=TRUE, groupnames=groupnames)
+# larger sample size for simulation
 nfac <- 100
 DiM.quan.plot(stype="sumstat", xbar1=xbar1, sd1=sd1, n1=n1*nfac, xbar2=xbar2, sd2=sd2, n2=n2*nfac, simulate=TRUE, groupnames=groupnames)
+# simulate values and plot them as raw
+set.seed(1423)
+v1 <- rnorm(n=n1, mean=xbar1, sd=sd1)
+v2 <- rnorm(n=n2, mean=xbar2, sd=sd2)
+DiM.quan.plot(stype="raw", v1=v1, v2=v2, groupnames=groupnames)
+
 
 
 # example 2
