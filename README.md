@@ -100,11 +100,8 @@ UMSprint(results=DiM.out, ccs=DiM.ccs, inval=inval, dig=3)
 UMSplot(inval=inval)
 ```
 
-<details>
-
-<summary>posterior probabilities</summary>
 ![Alt text](https://github.com/abcnorio/diffinmeans/blob/main/plots/input_qual/e3811349-86f9-455a-817a-b78dc8a1dc70.png?raw=true)
-</details>
+
 
 This results in:
 
