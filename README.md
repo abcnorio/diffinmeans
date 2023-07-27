@@ -106,7 +106,7 @@ This results in:
 
 <details>
 
-<summary>posterior probabilities</summary>
+<summary>Click here for Posterior Probabilities</summary>
 
 ```
 #########################################################################################
@@ -375,7 +375,7 @@ v2 <- rnorm(n=n2, mean=xbar2, sd=sd2)
 DiM.quan.plot(stype="raw", v1=v1, v2=v2, groupnames=groupnames)
 ```
 
-| Plot summary statistics | and raw/ simulate values |
+| Plot summary statistics | ...and raw/ simulated values |
 | --- | --- |
 | summary statistics and dnorm | raw values |
 | ![Alt text](./plots/input_quan/22d28ac1-7925-4043-b09d-4664f0d1bbec.png?raw=true) | ![Alt text](./plots/input_quan/91fb2066-e7cd-445a-a0cb-b03124836d22.png?raw=true) |
@@ -412,7 +412,7 @@ This gives the output:
 
 <details>
 
-<summary>posterior probabilities</summary>
+<summary>Click here for Posterior Probabilities</summary>
 
 ```
 ##########################################################################
