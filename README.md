@@ -193,19 +193,19 @@ The basic structure of the input values for `DiM` consists of summary statistics
 # input values for `DiM` after Studer (1998, p.47)
 # empirical values from (Bretthorst, 1993, p.189 and here from Jaynes, 1976 + 1983)	
 inval <- list(
-		Si=NULL,		# UMS specific -> successes group_1
+		Si=NULL,	# UMS specific -> successes group_1
 		Ni = 4,		# N group_1
-		Sii=NULL,		# UMS specific -> successes group_2
-		Nii = 9,		# N group_2
-		smin = 0,		# UMS specific -> bounds on the mean -> only for `SucRatesIntBounds`
-		Di = 50,		# mean group_1
-		si = 6.48,		# sd group_1
-		Dii = 42,		# mean group_2
+		Sii=NULL,	# UMS specific -> successes group_2
+		Nii = 9,	# N group_2
+		smin = 0,	# UMS specific -> bounds on the mean -> only for `SucRatesIntBounds`
+		Di = 50,	# mean group_1
+		si = 6.48,	# sd group_1
+		Dii = 42,	# mean group_2
 		sii = 7.48,	# sd group_2
 		L = 34,		# mean lower bound
 		H = 58,		# mean upper bound
 		sL = 3,		# stdanrd deviation lower bound
-		sH = 10,		# stdanrd deviation upper bound
+		sH = 10,	# stdanrd deviation upper bound
 		snames = c("Jaynes.1","Jaynes.2")
 )
 ```
